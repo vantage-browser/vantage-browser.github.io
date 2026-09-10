@@ -1,0 +1,9 @@
+{
+  "tracked": [
+    {
+      "name": "/",
+      "title": "Vantage Browser",
+      "template": "templates/template.html"
+    }
+  ]
+}

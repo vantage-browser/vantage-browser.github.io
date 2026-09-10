@@ -1,0 +1,73 @@
+<main id="main">
+<section class="hero" id="top">
+  <div class="hero-copy">
+    <p class="kicker"><span>VANT / 00</span> Browser in development</p>
+    <h1>Vantage<br><em>Browser</em></h1>
+    <p class="lede">A minimalist, keyboard-first browser for Linux. Built for a clear view, a small footprint and a desktop that stays out of your way.</p>
+    <div class="hero-actions">
+      <a class="button primary" href="https://github.com/vantage-browser/vant">Follow development <span aria-hidden="true">↗</span></a>
+      <a class="button" href="#roadmap">See the game plan <span aria-hidden="true">↓</span></a>
+    </div>
+    <p class="truth-note">Vantage is at the beginning. There is no public build yet.</p>
+  </div>
+  <div class="view" aria-label="Conceptual Vantage browser interface">
+    <div class="view-rail"><span class="rail-v">V</span><span>01</span><span>02</span><span>03</span><i></i><span class="rail-key">⌘K</span></div>
+    <div class="view-main">
+      <div class="view-bar"><span>vantage://new</span><b>VANT</b></div>
+      <div class="view-field">
+        <span class="coordinate">34° / CLEAR</span>
+        <div class="sightline"><i></i><b></b></div>
+        <p>YOUR VANTAGE<br>POINT ON THE WEB</p>
+        <span class="status">LOCAL · QUIET · OPEN</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="manifesto" id="principles">
+  <div class="section-index">01 / PRINCIPLES</div>
+  <div class="manifesto-copy">
+    <h2>The browser should be the frame.<br><span>Not the picture.</span></h2>
+    <p>Vantage is being designed around the work of browsing: fast navigation, durable sessions, clear permissions and direct keyboard control. No account requirement. No default telemetry. No attention-hungry chrome.</p>
+  </div>
+  <div class="principle-list">
+    <article><span>01</span><h3>Small by intent</h3><p>Measure startup, memory and background activity before making claims. Keep features only when they earn their footprint.</p></article>
+    <article><span>02</span><h3>Native to Linux</h3><p>Wayland first, with Omarchy as the reference desktop—not a web app wearing a desktop window.</p></article>
+    <article><span>03</span><h3>Keyboard fluent</h3><p>Tabs, workspaces, commands and navigation remain close at hand without making the interface cryptic.</p></article>
+    <article><span>04</span><h3>Local by default</h3><p>Your history, profiles and sessions belong on your machine. Private browsing has a real non-persistence contract.</p></article>
+  </div>
+</section>
+
+<section class="architecture" id="architecture">
+  <div class="section-index">02 / ARCHITECTURE</div>
+  <div class="arch-copy">
+    <p class="kicker">A practical first engine</p>
+    <h2>The web, without rebuilding the entire web.</h2>
+    <p>WebKitGTK handles standards-compatible page rendering and untrusted site JavaScript. Vantage owns the browser experience around it.</p>
+  </div>
+  <ol class="stack" aria-label="Vantage architecture">
+    <li><span>Interface</span><strong>GTK + Wayland</strong><small>Windows, input, portals and desktop integration</small></li>
+    <li><span>Browser</span><strong>Vantage Core</strong><small>Tabs, workspaces, profiles, policy and recovery</small></li>
+    <li><span>Web</span><strong>WebKitGTK</strong><small>HTML, CSS, page JavaScript, media and accessibility</small></li>
+    <li class="accent"><span>Script</span><strong>JS++</strong><small>Bounded privileged commands and automation</small></li>
+  </ol>
+</section>
+
+<section class="roadmap" id="roadmap">
+  <div class="section-index">03 / TRAJECTORY</div>
+  <div class="roadmap-head"><h2>First make it honest.<br>Then make it fast.</h2><p>The project advances through evidence-backed checkpoints. Performance, compatibility and security claims arrive only when their tests do.</p></div>
+  <div class="phases">
+    <article><span>V0—V2</span><h3>Open the view</h3><p>Reproducible GTK shell, safe navigation, tabs and complete keyboard control.</p></article>
+    <article><span>V3—V5</span><h3>Make it daily</h3><p>Profiles, crash recovery, downloads, permissions and a measured lifecycle baseline.</p></article>
+    <article><span>V6—V8</span><h3>Make it programmable</h3><p>Pinned JS++ embedding, capability-limited automation and a full isolation review.</p></article>
+    <article><span>V9—V11</span><h3>Make it real</h3><p>Omarchy packaging, sustained dogfooding, compatibility evidence and a public preview.</p></article>
+  </div>
+  <a class="roadmap-link" href="https://github.com/vantage-browser/vant">Read the full checkpoint plan in HANDOVER.md <span aria-hidden="true">↗</span></a>
+</section>
+
+<section class="closing">
+  <p>VANTAGE / VANT</p>
+  <h2>A better place<br>to see from.</h2>
+  <a class="button primary" href="https://github.com/vantage-browser/vant">Watch the repository <span aria-hidden="true">↗</span></a>
+</section>
+</main>
