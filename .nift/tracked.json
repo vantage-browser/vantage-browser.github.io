@@ -1,7 +1,7 @@
 {
   "tracked": [
     {"name":"/","title":"Vantage Browser","template":"templates/home.html"},
-    {"name":"features","title":"Features","template":"templates/template.html"},
+    {"name":"features","title":"Features","template":"templates/docs.html"},
     {"name":"installation","title":"Installation","template":"templates/docs.html"},
     {"name":"docs","title":"Documentation","template":"templates/docs.html"},
     {"name":"shortcuts","title":"Keyboard shortcuts","template":"templates/docs.html"},

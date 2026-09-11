@@ -1,7 +1,7 @@
 {
   "name": "features",
   "title": "Features",
-  "template": "templates/template.html",
+  "template": "templates/docs.html",
   "content": "content/features.html",
   "output": "public/features.html",
   "minify": false,
@@ -13,19 +13,27 @@
   "pagination-pages": 0,
   "dependencies": [
     "content/features.html",
-    "templates/head.html",
-    "templates/template.html"
+    "templates/docs-nav.html",
+    "templates/docs.html",
+    "templates/head.html"
   ],
   "reqs": [
+    "public/architecture.html",
     "public/assets/css/extras.css",
     "public/assets/css/style.css",
     "public/assets/images/favicon.svg",
     "public/assets/images/vant-mark.svg",
     "public/assets/js/script.js",
+    "public/desktop-integration.html",
+    "public/development.html",
     "public/docs.html",
+    "public/features.html",
     "public/index.html",
     "public/installation.html",
     "public/known-limitations.html",
-    "public/security.html"
+    "public/privacy.html",
+    "public/security.html",
+    "public/shortcuts.html",
+    "public/video-rendering.html"
   ]
 }
