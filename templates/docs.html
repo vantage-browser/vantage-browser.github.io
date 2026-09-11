@@ -1,0 +1,11 @@
+<!doctype html>
+<html lang="en">
+<head>@input("templates/head.html")</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header"><a class="brand" href="@pathto('/')"><img src="@pathto('public/assets/images/vant-mark.svg')" alt=""><span>Vantage Browser</span></a><button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Open navigation"><span></span><span></span></button><nav class="site-nav" id="site-nav" aria-label="Primary"><a href="@pathto('installation')">Install</a><a href="@pathto('docs')">Docs</a><a href="@pathto('security')">Security</a><a href="https://github.com/vantage-browser/vant">GitHub</a></nav></header>
+<div class="docs-shell">@input("templates/docs-nav.html")<main class="docs-content" id="main"><p class="eyebrow">Vantage documentation</p><h1>$[title]</h1>@content</main></div>
+<footer><p>Vantage Browser is built in the open for Linux.</p><nav><a href="@pathto('docs')">Documentation</a><a href="@pathto('known-limitations')">Known limitations</a><a href="https://github.com/vantage-browser/vant">Source</a></nav></footer>
+<script src="@pathto('public/assets/js/script.js')" defer></script>
+</body>
+</html>

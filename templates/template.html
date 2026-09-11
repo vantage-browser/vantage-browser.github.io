@@ -1,26 +1,20 @@
 <!doctype html>
 <html lang="en">
-	<head>
-		@input("templates/head.html")
-	</head>
-	<body>
-		<a class="skip-link" href="#main">Skip to content</a>
-		<header class="site-header">
-			<a class="brand" href="#top" aria-label="Vantage Browser home">
-				<svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true"><path d="M3 5h7l6 17 6-17h7L19 29h-6L3 5Z"/><path class="cut" d="m12 5 4 11 4-11h-8Z"/></svg>
-				<span>Vantage</span>
-			</a>
-			<nav aria-label="Primary navigation">
-				<a href="#principles">Principles</a>
-				<a href="#architecture">Architecture</a>
-				<a href="#roadmap">Roadmap</a>
-				<a href="https://github.com/vantage-browser/vant">GitHub</a>
-			</nav>
-		</header>
-		@content
-		<footer>
-			<div><strong>Vantage Browser</strong><span>A clearer point of view on the web.</span></div>
-			<div><a href="https://github.com/vantage-browser/vant">Source</a><span>Pre-release · Linux first</span></div>
-		</footer>
-	</body>
+<head>@input("templates/head.html")</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+  <a class="brand" href="@pathto('/')"><img src="@pathto('public/assets/images/vant-mark.svg')" alt=""><span>Vantage Browser</span></a>
+  <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Open navigation"><span></span><span></span></button>
+  <nav class="site-nav" id="site-nav" aria-label="Primary">
+    <a href="@pathto('installation')">Install</a>
+    <a href="@pathto('docs')">Docs</a>
+    <a href="@pathto('security')">Security</a>
+    <a href="https://github.com/vantage-browser/vant">GitHub</a>
+  </nav>
+</header>
+<main id="main">@content</main>
+<footer><p>Vantage Browser is built in the open for Linux.</p><nav><a href="@pathto('docs')">Documentation</a><a href="@pathto('known-limitations')">Known limitations</a><a href="https://github.com/vantage-browser/vant">Source</a></nav></footer>
+<script src="@pathto('public/assets/js/script.js')" defer></script>
+</body>
 </html>

@@ -1,9 +1,9 @@
 {
-  "name": "/",
-  "title": "Vantage Browser",
-  "template": "templates/home.html",
-  "content": "content/index.html",
-  "output": "public/index.html",
+  "name": "privacy",
+  "title": "Privacy",
+  "template": "templates/docs.html",
+  "content": "content/privacy.html",
+  "output": "public/privacy.html",
   "minify": false,
   "minify-version": 0,
   "pagination": false,
@@ -12,22 +12,28 @@
   "pagination-separator": "",
   "pagination-pages": 0,
   "dependencies": [
-    "content/index.html",
-    "templates/home.html"
+    "content/privacy.html",
+    "templates/docs-nav.html",
+    "templates/docs.html",
+    "templates/head.html"
   ],
   "reqs": [
+    "public/architecture.html",
     "public/assets/css/extras.css",
     "public/assets/css/style.css",
     "public/assets/images/favicon.svg",
     "public/assets/images/vant-mark.svg",
-    "public/assets/images/vant.png",
-    "public/assets/images/vantage-browser.png",
     "public/assets/js/script.js",
+    "public/desktop-integration.html",
+    "public/development.html",
     "public/docs.html",
     "public/features.html",
     "public/index.html",
     "public/installation.html",
     "public/known-limitations.html",
-    "public/security.html"
+    "public/privacy.html",
+    "public/security.html",
+    "public/shortcuts.html",
+    "public/video-rendering.html"
   ]
 }

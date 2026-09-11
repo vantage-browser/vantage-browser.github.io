@@ -1,0 +1,4 @@
+<p class="docs-intro">Vantage is C++20 software built against GTK 4, WebKitGTK 6.0 and SQLite. A reviewed JS++ snapshot is included in the repository.</p><h2>Arch and Omarchy dependencies</h2><pre><code>sudo pacman -S --needed base-devel pkgconf python gtk4 webkitgtk-6.0 sqlite</code></pre><p>For complete media support:</p><pre><code>sudo pacman -S --needed gst-plugins-base gst-plugins-good \
+  gst-plugins-bad gst-plugins-ugly gst-libav</code></pre><h2>Build and run</h2><pre><code>make -j"$(nproc)"
+./build/vant</code></pre><h2>Checks</h2><pre><code>make test
+make test-sanitize</code></pre><p>GUI behavior still needs testing on a real Wayland desktop. Headless tests do not establish target-platform compatibility.</p>

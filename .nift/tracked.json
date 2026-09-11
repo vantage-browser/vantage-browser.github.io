@@ -1,9 +1,19 @@
 {
   "tracked": [
-    {
-      "name": "/",
-      "title": "Vantage Browser",
-      "template": "templates/template.html"
-    }
+    {"name":"/","title":"Vantage Browser","template":"templates/home.html"},
+    {"name":"features","title":"Features","template":"templates/template.html"},
+    {"name":"installation","title":"Installation","template":"templates/docs.html"},
+    {"name":"docs","title":"Documentation","template":"templates/docs.html"},
+    {"name":"shortcuts","title":"Keyboard shortcuts","template":"templates/docs.html"},
+    {"name":"privacy","title":"Privacy","template":"templates/docs.html"},
+    {"name":"security","title":"Security model","template":"templates/docs.html"},
+    {"name":"architecture","title":"Architecture","template":"templates/docs.html"},
+    {"name":"video-rendering","title":"Video rendering","template":"templates/docs.html"},
+    {"name":"desktop-integration","title":"Desktop integration","template":"templates/docs.html"},
+    {"name":"development","title":"Build from source","template":"templates/docs.html"},
+    {"name":"known-limitations","title":"Known limitations","template":"templates/docs.html"},
+    {"name":"install","title":"install","content-ext":".sh","output-ext":".sh"},
+    {"name":"update","title":"update","content-ext":".sh","output-ext":".sh"},
+    {"name":"uninstall","title":"uninstall","content-ext":".sh","output-ext":".sh"}
   ]
 }

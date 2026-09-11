@@ -1,9 +1,9 @@
 {
-  "name": "/",
-  "title": "Vantage Browser",
-  "template": "templates/home.html",
-  "content": "content/index.html",
-  "output": "public/index.html",
+  "name": "features",
+  "title": "Features",
+  "template": "templates/template.html",
+  "content": "content/features.html",
+  "output": "public/features.html",
   "minify": false,
   "minify-version": 0,
   "pagination": false,
@@ -12,19 +12,17 @@
   "pagination-separator": "",
   "pagination-pages": 0,
   "dependencies": [
-    "content/index.html",
-    "templates/home.html"
+    "content/features.html",
+    "templates/head.html",
+    "templates/template.html"
   ],
   "reqs": [
     "public/assets/css/extras.css",
     "public/assets/css/style.css",
     "public/assets/images/favicon.svg",
     "public/assets/images/vant-mark.svg",
-    "public/assets/images/vant.png",
-    "public/assets/images/vantage-browser.png",
     "public/assets/js/script.js",
     "public/docs.html",
-    "public/features.html",
     "public/index.html",
     "public/installation.html",
     "public/known-limitations.html",
