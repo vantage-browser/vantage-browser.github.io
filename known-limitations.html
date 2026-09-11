@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta name="description" content="Vantage Browser is a minimalist, keyboard-first WebKitGTK browser for Linux with no telemetry or account requirement.">
+      <meta name="theme-color" content="#171716">
+      <title>Known limitations · Vantage Browser</title>
+      <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg">
+      <link rel="stylesheet" href="assets/css/style.css">
+      <link rel="stylesheet" href="assets/css/extras.css"></head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header"><a class="brand" href="./"><img src="assets/images/vant-mark.svg" alt=""><span>Vantage Browser</span></a><button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Open navigation"><span></span><span></span></button><nav class="site-nav" id="site-nav" aria-label="Primary"><a href="./installation.html">Install</a><a href="./docs.html">Docs</a><a href="./security.html">Security</a><a href="https://github.com/vantage-browser/vant">GitHub</a></nav></header>
+<div class="docs-shell"><button class="docs-nav-toggle" type="button" aria-expanded="false" aria-controls="docs-nav">Browse documentation</button>
+                        <nav class="docs-nav" id="docs-nav" aria-label="Documentation">
+                          <a class="docs-home" href="./docs.html">Documentation home</a>
+                          <details open><summary>Get started</summary><a href="./installation.html">Installation</a><a href="./shortcuts.html">Keyboard shortcuts</a><a href="./desktop-integration.html">Desktop integration</a></details>
+                          <details open><summary>Understand Vantage</summary><a href="./features.html">Features</a><a href="./privacy.html">Privacy</a><a href="./security.html">Security model</a><a href="./architecture.html">Architecture</a></details>
+                          <details open><summary>Operate</summary><a href="./video-rendering.html">Video rendering</a><a href="./known-limitations.html">Known limitations</a><a href="./development.html">Build from source</a></details>
+                        </nav><main class="docs-content" id="main"><p class="eyebrow">Vantage documentation</p><h1>Known limitations</h1><p class="docs-intro">Vantage is a public-preview browser, not a drop-in replacement for every Chromium workflow.</p><ul class="limitations"><li><strong>Linux first.</strong><span>The current application targets Linux and Wayland. macOS and Windows builds are not provided.</span></li><li><strong>Web compatibility follows WebKitGTK.</strong><span>Some sites optimize exclusively for Chromium and may behave differently or reject the browser.</span></li><li><strong>No extension ecosystem.</strong><span>Chromium and Firefox extensions are not supported.</span></li><li><strong>No browser account or sync.</strong><span>Bookmarks, history and settings stay local to the machine.</span></li><li><strong>Compatibility rendering trades performance.</strong><span>The reliable default may be less smooth than accelerated compositing on supported hardware.</span></li><li><strong>Packaging is initially narrow.</strong><span>The installer targets x86_64 Arch, Omarchy, Debian and Ubuntu. Debian-family releases without WebKitGTK 6.0 still require a source build or newer release.</span></li></ul><h2>Good bug reports</h2><p>Include the Vantage commit or version, Linux distribution, WebKitGTK version, whether accelerated rendering was enabled, exact reproduction steps and sanitized terminal output.</p></main></div>
+<footer><p>Vantage Browser is built in the open for Linux.</p><nav><a href="./docs.html">Documentation</a><a href="./known-limitations.html">Known limitations</a><a href="https://github.com/vantage-browser/vant">Source</a></nav></footer>
+<script src="assets/js/script.js" defer></script>
+</body>
+</html>
