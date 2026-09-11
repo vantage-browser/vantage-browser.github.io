@@ -14,6 +14,7 @@ Editable pages live in `content/`, shared layouts in `templates/`, and static
 assets in `public/assets/`. The nested `public` repository contains the site
 published by GitHub Pages.
 
-The installation scripts expect release archives named
-`vant-linux-x86_64.tar.gz` and a `checksums.txt` file in the
-`vantage-browser/vant` GitHub release.
+The installation scripts consume the immutable `vant-source.tar.gz`,
+`version.txt` and `checksums.txt` assets from the latest tagged
+`vantage-browser/vant` GitHub release. Vantage is compiled against the target
+system's GTK, WebKitGTK and multimedia libraries before installation.

@@ -14,6 +14,7 @@ icons_root="$data_home/icons/hicolor"
 rm -f "$install_dir/vant" "$install_dir/vant.previous"
 rm -f "$applications_dir/cv.vantage_browser.Vantage.desktop"
 rm -f "$icons_root/512x512/apps/cv.vantage_browser.Vantage.png"
+rm -f "$data_home/vantage-browser-installed-version"
 command -v update-desktop-database >/dev/null 2>&1 && update-desktop-database "$applications_dir" >/dev/null 2>&1 || true
 command -v gtk-update-icon-cache >/dev/null 2>&1 && gtk-update-icon-cache -f "$icons_root" >/dev/null 2>&1 || true
 
