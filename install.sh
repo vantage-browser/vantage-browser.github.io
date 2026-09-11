@@ -57,8 +57,22 @@ elif command -v apt-get >/dev/null 2>&1; then
   sudo apt-get install -y ca-certificates curl libgtk-4-1 libwebkitgtk-6.0-4 \
     libsqlite3-0 gstreamer1.0-plugins-base gstreamer1.0-plugins-good \
     gstreamer1.0-plugins-bad gstreamer1.0-plugins-ugly gstreamer1.0-libav
+elif command -v dnf >/dev/null 2>&1; then
+  sudo dnf install -y gtk4 webkitgtk6.0 sqlite-libs \
+    gstreamer1-plugins-base gstreamer1-plugins-good gstreamer1-plugins-bad-free
+  for package in gstreamer1-plugins-ugly-free gstreamer1-plugin-libav; do
+    sudo dnf install -y "$package" ||
+      echo "Vantage installer: optional media package $package is unavailable; continuing." >&2
+  done
+elif command -v zypper >/dev/null 2>&1; then
+  sudo zypper --non-interactive install libgtk-4-1 libwebkitgtk-6_0-4 libsqlite3-0 \
+    gstreamer-plugins-base gstreamer-plugins-good gstreamer-plugins-bad
+  for package in gstreamer-plugins-ugly gstreamer-plugins-libav; do
+    sudo zypper --non-interactive install "$package" ||
+      echo "Vantage installer: optional media package $package is unavailable; continuing." >&2
+  done
 else
-  echo "Vantage installer: this preview installer currently supports Arch, Omarchy, Debian and Ubuntu." >&2
+  echo "Vantage installer: this preview installer currently supports Arch, Omarchy, Debian, Ubuntu, Fedora and openSUSE." >&2
   echo "Other Linux systems can build Vantage from source." >&2
   exit 1
 fi
