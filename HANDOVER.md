@@ -29,8 +29,8 @@ nift status
 nift build --all
 ```
 
-Then inspect source and generated repository diffs separately. Commits, pushes,
-deployment, releases and public claims require explicit approval.
+Then inspect source and generated repository diffs separately. Pushes, deployment,
+releases and public claims require explicit approval.
 
 This is a living handover for working effectively in a Nift project.
 
