@@ -5,3 +5,4 @@ vant agent js 'document.title'
 vant agent js --file script.js
 cat script.js | vant agent js -</code></pre>
 <h2>Current namespaces</h2><p><code>browser.*</code> controls live windows, tabs and navigation. <code>page.*</code> covers JavaScript, semantic snapshots/interactions, waits, screenshots/content and diagnostics. WebKit/Vantage service methods expose settings, browser data and capabilities. Query <code>capabilities</code> and <code>describe</code> rather than assuming a method exists on every installed version.</p>
+<h2>A12 concurrency contract</h2><p>Independent local clients are serviced concurrently while WebKit mutations are marshalled onto GTK's main context. A slow client does not serialize unrelated clients. Closed tab/window IDs and invalidated semantic references fail explicitly and are never rebound to new objects.</p>
