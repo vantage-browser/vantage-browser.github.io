@@ -1,0 +1,10 @@
+<p class="docs-intro">Vantage can be driven by a trusted local agent through the same live browser session you use yourself. The agent sees and controls real Vantage windows and tabs rather than launching a separate automation browser.</p>
+<h2>Current agent surface</h2><p>The first agent-native implementation provides stable window and tab identities, a versioned local RPC and CLI, live navigation, arbitrary page JavaScript, semantic page snapshots and interaction, screenshots and content inspection, broad WebKit property/settings introspection, and access to Vantage-owned downloads, bookmarks, history, permissions, cookies and profile state.</p>
+<pre><code>vant agent status
+vant agent capabilities
+vant agent call browser.tabs '{}'
+vant agent call page.snapshot '{"tab_id":1}'
+vant agent js 'document.title'</code></pre>
+<h2>Human and agent share one browser</h2><p>Selecting or navigating a tab through the agent API changes the normal visible Vantage browser. You can watch the work, use the browser at the same time, and take over normally. Closed object IDs and stale semantic element references are not silently reused.</p>
+<h2>Trust model</h2><p>Vantage assumes the local agent is deliberately trusted with the user's machine authority. That does not extend the same trust to websites. The agent controls WebKit from the Vantage application side; ordinary page JavaScript remains inside WebKit's normal web security and process boundaries.</p>
+<h2>Agent reference</h2><p>The repository contains a deliberately exhaustive <code>docs/AGENT-REFERENCE.md</code> for agents and integration authors. Human documentation stays focused on concepts, common commands and practical workflows; the agent reference carries exact RPC behavior, method names and lifecycle rules.</p>
