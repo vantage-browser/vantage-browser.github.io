@@ -6,3 +6,10 @@ vant agent js --file script.js
 cat script.js | vant agent js -</code></pre>
 <h2>Current namespaces</h2><p><code>browser.*</code> controls live windows, tabs and navigation. <code>page.*</code> covers JavaScript, semantic snapshots/interactions, waits, screenshots/content and diagnostics. WebKit/Vantage service methods expose settings, browser data and capabilities. Query <code>capabilities</code> and <code>describe</code> rather than assuming a method exists on every installed version.</p>
 <h2>A12 concurrency contract</h2><p>Independent local clients are serviced concurrently while WebKit mutations are marshalled onto GTK's main context. A slow client does not serialize unrelated clients. Closed tab/window IDs and invalidated semantic references fail explicitly and are never rebound to new objects.</p>
+<h2>A13 CLI shortcuts and output</h2><pre><code>vant agent tabs
+vant agent open https://example.com 1
+vant agent snapshot 1
+vant agent click @e3_4 1
+vant agent fill @e3_7 hello 1
+vant agent diagnostics 1
+vant agent --json capabilities</code></pre><p>Exit status is 0 for success, 1 for runtime/RPC failure and 2 for invalid CLI usage. Default output is the concise result; <code>--json</code> emits the complete protocol envelope. <code>call</code> remains the universal method escape hatch, and JavaScript accepts inline text, a file or stdin.</p>
