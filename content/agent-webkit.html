@@ -1,0 +1,7 @@
+<p class="docs-intro">Vantage provides high-level semantic operations for efficiency and deep WebKit/page access when those abstractions are insufficient.</p>
+<h2>Arbitrary JavaScript</h2><pre><code>vant agent js 'document.title'
+vant agent call page.javascript '{"tab_id":1,"script":"location.href"}'</code></pre><p>Evaluation is requested by the trusted application. It does not grant the loaded page a reverse bridge into Vantage.</p>
+<h2>Semantic snapshots</h2><pre><code>vant agent call page.snapshot '{"tab_id":1}'
+# returns compact refs such as @e3_17
+vant agent call page.interact '{"tab_id":1,"ref":"@e3_17","action":"click"}'</code></pre><p>References are deliberately stale after relevant DOM mutation/navigation rather than silently pointing at another element.</p>
+<h2>Inspection</h2><p>Agents can inspect rendered/content state, screenshots, viewport/scroll/zoom/find state, browser settings and capability-described WebKit properties. Use semantic operations for routine work and arbitrary JavaScript/WebKit introspection as the escape hatch.</p>

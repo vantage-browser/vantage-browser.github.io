@@ -1,0 +1,5 @@
+<p class="docs-intro">Diagnostics and asynchronous browser behavior for agents. This page is intentionally detailed and evolves checkpoint-by-checkpoint with the implementation.</p>
+<h2>A10 diagnostics</h2><pre><code>vant agent call page.diagnostics '{"tab_id":1}'
+vant agent call page.diagnostics.clear '{"tab_id":1}'
+vant agent call page.native_diagnostics '{"tab_id":1}'</code></pre><p>The page diagnostics ring records bounded console calls, JavaScript errors and unhandled rejections. Native diagnostics report top-level load failure and WebKit web-process termination. Vantage does not claim arbitrary CDP-style response-body capture where WebKitGTK does not expose a clean equivalent.</p>
+<h2>Page privilege rule</h2><p>The diagnostics recorder observes page-visible state but exposes no privileged Vantage object. A hostile page cannot call the agent RPC simply because an agent can inspect that page.</p>

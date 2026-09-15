@@ -1,19 +1,112 @@
 {
   "tracked": [
-    {"name":"/","title":"Vantage Browser","template":"templates/home.html"},
-    {"name":"features","title":"Features","template":"templates/docs.html"},
-    {"name":"installation","title":"Installation","template":"templates/docs.html"},
-    {"name":"docs","title":"Documentation","template":"templates/docs.html"},
-    {"name":"shortcuts","title":"Keyboard shortcuts","template":"templates/docs.html"},
-    {"name":"privacy","title":"Privacy","template":"templates/docs.html"},
-    {"name":"security","title":"Security model","template":"templates/docs.html"},
-    {"name":"architecture","title":"Architecture","template":"templates/docs.html"},
-    {"name":"video-rendering","title":"Video rendering","template":"templates/docs.html"},
-    {"name":"desktop-integration","title":"Desktop integration","template":"templates/docs.html"},
-    {"name":"development","title":"Build from source","template":"templates/docs.html"},
-    {"name":"known-limitations","title":"Known limitations","template":"templates/docs.html"},
-    {"name":"install","title":"install","content-ext":".sh","output-ext":".sh"},
-    {"name":"update","title":"update","content-ext":".sh","output-ext":".sh"},
-    {"name":"uninstall","title":"uninstall","content-ext":".sh","output-ext":".sh"}
+    {
+      "name": "/",
+      "title": "Vantage Browser",
+      "template": "templates/home.html"
+    },
+    {
+      "name": "features",
+      "title": "Features",
+      "template": "templates/docs.html"
+    },
+    {
+      "name": "installation",
+      "title": "Installation",
+      "template": "templates/docs.html"
+    },
+    {
+      "name": "docs",
+      "title": "Documentation",
+      "template": "templates/docs.html"
+    },
+    {
+      "name": "shortcuts",
+      "title": "Keyboard shortcuts",
+      "template": "templates/docs.html"
+    },
+    {
+      "name": "privacy",
+      "title": "Privacy",
+      "template": "templates/docs.html"
+    },
+    {
+      "name": "security",
+      "title": "Security model",
+      "template": "templates/docs.html"
+    },
+    {
+      "name": "architecture",
+      "title": "Architecture",
+      "template": "templates/docs.html"
+    },
+    {
+      "name": "video-rendering",
+      "title": "Video rendering",
+      "template": "templates/docs.html"
+    },
+    {
+      "name": "desktop-integration",
+      "title": "Desktop integration",
+      "template": "templates/docs.html"
+    },
+    {
+      "name": "development",
+      "title": "Build from source",
+      "template": "templates/docs.html"
+    },
+    {
+      "name": "known-limitations",
+      "title": "Known limitations",
+      "template": "templates/docs.html"
+    },
+    {
+      "name": "install",
+      "title": "install",
+      "content-ext": ".sh",
+      "output-ext": ".sh"
+    },
+    {
+      "name": "agent-recipes",
+      "title": "Agent recipes",
+      "template": "templates/docs.html"
+    },
+    {
+      "name": "agent-events",
+      "title": "Agent events and diagnostics",
+      "template": "templates/docs.html"
+    },
+    {
+      "name": "agent-webkit",
+      "title": "Agent WebKit and page reference",
+      "template": "templates/docs.html"
+    },
+    {
+      "name": "agent-rpc",
+      "title": "Agent RPC and CLI",
+      "template": "templates/docs.html"
+    },
+    {
+      "name": "agent-reference",
+      "title": "Agent reference",
+      "template": "templates/docs.html"
+    },
+    {
+      "name": "agent-use",
+      "title": "Agent use",
+      "template": "templates/docs.html"
+    },
+    {
+      "name": "update",
+      "title": "update",
+      "content-ext": ".sh",
+      "output-ext": ".sh"
+    },
+    {
+      "name": "uninstall",
+      "title": "uninstall",
+      "content-ext": ".sh",
+      "output-ext": ".sh"
+    }
   ]
 }

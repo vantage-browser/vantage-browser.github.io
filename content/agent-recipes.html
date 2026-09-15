@@ -1,0 +1,10 @@
+<p class="docs-intro">Executable patterns intended for agents driving the same visible Vantage session as the human user.</p>
+<h2>Inspect and operate a page</h2><pre><code>vant agent call browser.tabs '{}'
+vant agent call page.snapshot '{"tab_id":1}'
+vant agent call page.interact '{"tab_id":1,"ref":"@e1_4","action":"click"}'
+vant agent call page.wait '{"tab_id":1,"text":"Welcome","timeout_ms":5000}'</code></pre>
+<h2>Debug a frontend</h2><pre><code># after rebuilding/reloading the application
+vant agent call page.diagnostics.clear '{"tab_id":1}'
+vant agent call browser.reload '{"tab_id":1}'
+vant agent call page.diagnostics '{"tab_id":1}'
+vant agent call page.snapshot '{"tab_id":1}'</code></pre><p>Use arbitrary JavaScript when semantic operations are not expressive enough. The agent is operating the user's actual tab, so human observation/intervention remains possible.</p>
