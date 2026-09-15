@@ -13,3 +13,5 @@ vant agent click @e3_4 1
 vant agent fill @e3_7 hello 1
 vant agent diagnostics 1
 vant agent --json capabilities</code></pre><p>Exit status is 0 for success, 1 for runtime/RPC failure and 2 for invalid CLI usage. Default output is the concise result; <code>--json</code> emits the complete protocol envelope. <code>call</code> remains the universal method escape hatch, and JavaScript accepts inline text, a file or stdin.</p>
+<h2>A14 direct clients</h2><p>The Unix RPC is the authoritative interface, not the CLI. The source tree includes a dependency-free Python reference client showing framing for integrations. Vantage has no Gantry dependency: Cortex, Warden, Codex, Claude Code, OpenCode, scripts and custom agents can all use the same contract. An MCP adapter can be layered over RPC later without creating a second control implementation.</p><pre><code>python3 tools/vant_agent.py browser.tabs '{}'
+python3 tools/vant_agent.py page.snapshot '{"tab_id":1}'</code></pre>
