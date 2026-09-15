@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta name="description" content="Vantage Browser is a minimalist, keyboard-first WebKitGTK browser for Linux with no telemetry or account requirement.">
+      <meta name="theme-color" content="#171716">
+      <title>Agent use · Vantage Browser</title>
+      <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg">
+      <link rel="stylesheet" href="assets/css/style.css">
+      <link rel="stylesheet" href="assets/css/extras.css">
+      <link rel="stylesheet" href="assets/css/mobile-nav.css"></head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header"><a class="brand" href="./"><img src="assets/images/vant-mark.svg" alt=""><span>Vantage Browser</span></a><button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Open navigation"><span></span><span></span><span></span></button><nav class="site-nav" id="site-nav" aria-label="Primary"><a href="./installation.html">Install</a><a href="./docs.html">Docs</a><a href="./security.html">Security</a><a href="https://gantry.cv">Gantry</a><a href="https://github.com/vantage-browser/vant">GitHub</a></nav></header>
+<div class="docs-shell"><button class="docs-nav-toggle" type="button" aria-expanded="false" aria-controls="docs-nav">Browse documentation</button>
+                        <nav class="docs-nav" id="docs-nav" aria-label="Documentation">
+                          <a class="docs-home" href="./docs.html">Documentation home</a>
+                          <details open><summary>Get started</summary><a href="./installation.html">Installation</a><a href="./shortcuts.html">Keyboard shortcuts</a><a href="./desktop-integration.html">Desktop integration</a></details>
+                          <details open><summary>Understand Vantage</summary><a href="./features.html">Features</a><a href="./privacy.html">Privacy</a><a href="./security.html">Security model</a><a href="./architecture.html">Architecture</a></details>
+                          <details open><summary>Operate</summary><a href="./video-rendering.html">Video rendering</a><a href="./known-limitations.html">Known limitations</a><a href="./development.html">Build from source</a></details>
+                        </nav><main class="docs-content" id="main"><p class="eyebrow">Vantage documentation</p><h1>Agent use</h1><p class="docs-intro">Vantage can be driven by a trusted local agent through the same live browser session you use yourself. The agent sees and controls real Vantage windows and tabs rather than launching a separate automation browser.</p>
+                                                                                                                                 <h2>Current agent surface</h2><p>The first agent-native implementation provides stable window and tab identities, a versioned local RPC and CLI, live navigation, arbitrary page JavaScript, semantic page snapshots and interaction, screenshots and content inspection, broad WebKit property/settings introspection, and access to Vantage-owned downloads, bookmarks, history, permissions, cookies and profile state.</p>
+                                                                                                                                 <pre><code>vant agent status
+vant agent capabilities
+vant agent call browser.tabs '{}'
+vant agent call page.snapshot '{"tab_id":1}'
+vant agent js 'document.title'</code></pre>
+                                                                                                                                 <h2>Human and agent share one browser</h2><p>Selecting or navigating a tab through the agent API changes the normal visible Vantage browser. You can watch the work, use the browser at the same time, and take over normally. Closed object IDs and stale semantic element references are not silently reused.</p>
+                                                                                                                                 <h2>Trust model</h2><p>Vantage assumes the local agent is deliberately trusted with the user's machine authority. That does not extend the same trust to websites. The agent controls WebKit from the Vantage application side; ordinary page JavaScript remains inside WebKit's normal web security and process boundaries.</p>
+                                                                                                                                 <h2>Agent reference</h2><p>The website has a deliberately exhaustive <a href="./agent-reference.html">Agent reference</a> written for agents and integration authors. Human documentation stays focused on concepts, common commands and practical workflows; the agent reference carries exact RPC behavior, method names and lifecycle rules.</p></main></div>
+<footer><p>Vantage Browser is built in the open for Linux.</p><nav><a href="./docs.html">Documentation</a><a href="./known-limitations.html">Known limitations</a><a href="https://github.com/vantage-browser/vant">Source</a></nav></footer>
+<script src="assets/js/script.js" defer></script>
+</body>
+</html>

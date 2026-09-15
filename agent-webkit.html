@@ -4,7 +4,7 @@
       <meta name="viewport" content="width=device-width,initial-scale=1">
       <meta name="description" content="Vantage Browser is a minimalist, keyboard-first WebKitGTK browser for Linux with no telemetry or account requirement.">
       <meta name="theme-color" content="#171716">
-      <title>Documentation · Vantage Browser</title>
+      <title>Agent WebKit and page reference · Vantage Browser</title>
       <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg">
       <link rel="stylesheet" href="assets/css/style.css">
       <link rel="stylesheet" href="assets/css/extras.css">
@@ -18,10 +18,13 @@
                           <details open><summary>Get started</summary><a href="./installation.html">Installation</a><a href="./shortcuts.html">Keyboard shortcuts</a><a href="./desktop-integration.html">Desktop integration</a></details>
                           <details open><summary>Understand Vantage</summary><a href="./features.html">Features</a><a href="./privacy.html">Privacy</a><a href="./security.html">Security model</a><a href="./architecture.html">Architecture</a></details>
                           <details open><summary>Operate</summary><a href="./video-rendering.html">Video rendering</a><a href="./known-limitations.html">Known limitations</a><a href="./development.html">Build from source</a></details>
-                        </nav><main class="docs-content" id="main"><p class="eyebrow">Vantage documentation</p><h1>Documentation</h1><p class="docs-intro">Start with installation, learn the keyboard model, then review Vantage’s security boundary and current limitations before deciding whether it fits your browsing needs.</p>
-                                                                                                                                     <div class="doc-cards"><a href="./installation.html"><span>01</span><strong>Install Vantage</strong><small>Supported system, dependencies and updates</small></a><a href="./shortcuts.html"><span>02</span><strong>Learn the shortcuts</strong><small>Navigate tabs and browser controls quickly</small></a><a href="./security.html"><span>03</span><strong>Understand security</strong><small>What Vantage owns and what WebKitGTK owns</small></a><a href="./known-limitations.html"><span>04</span><strong>Check limitations</strong><small>Current platform and compatibility boundaries</small></a><a href="./agent-use.html"><span>05</span><strong>Use Vantage with agents</strong><small>Drive the same live browser through CLI and RPC</small></a></div>
-                                                                                                                                     <h2>What Vantage is</h2><p>Vantage is not a Chromium fork and contains no Chromium or Blink code. It is a native GTK browser whose pages are rendered by WebKitGTK. Vantage implements its own browser chrome, tabs, address bar, history, bookmarks, downloads and local browser model.</p>
-                                                                                                                                     <h2>Current target</h2><p>The first target is Linux on Wayland, with Omarchy and Arch-based systems as the primary public-preview environment. Broader packaging should follow retained compatibility testing rather than assumption.</p></main></div>
+                        </nav><main class="docs-content" id="main"><p class="eyebrow">Vantage documentation</p><h1>Agent WebKit and page reference</h1><p class="docs-intro">Vantage provides high-level semantic operations for efficiency and deep WebKit/page access when those abstractions are insufficient.</p>
+                                                                                                                                                       <h2>Arbitrary JavaScript</h2><pre><code>vant agent js 'document.title'
+vant agent call page.javascript '{"tab_id":1,"script":"location.href"}'</code></pre><p>Evaluation is requested by the trusted application. It does not grant the loaded page a reverse bridge into Vantage.</p>
+                                                                                                                                                       <h2>Semantic snapshots</h2><pre><code>vant agent call page.snapshot '{"tab_id":1}'
+# returns compact refs such as @e3_17
+vant agent call page.interact '{"tab_id":1,"ref":"@e3_17","action":"click"}'</code></pre><p>References are deliberately stale after relevant DOM mutation/navigation rather than silently pointing at another element.</p>
+                                                                                                                                                       <h2>Inspection</h2><p>Agents can inspect rendered/content state, screenshots, viewport/scroll/zoom/find state, browser settings and capability-described WebKit properties. Use semantic operations for routine work and arbitrary JavaScript/WebKit introspection as the escape hatch.</p></main></div>
 <footer><p>Vantage Browser is built in the open for Linux.</p><nav><a href="./docs.html">Documentation</a><a href="./known-limitations.html">Known limitations</a><a href="https://github.com/vantage-browser/vant">Source</a></nav></footer>
 <script src="assets/js/script.js" defer></script>
 </body>
