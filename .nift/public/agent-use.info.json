@@ -1,9 +1,9 @@
 {
-  "name": "video-rendering",
-  "title": "Video rendering",
+  "name": "agent-use",
+  "title": "Agent use",
   "template": "templates/docs.html",
-  "content": "content/video-rendering.html",
-  "output": "public/video-rendering.html",
+  "content": "content/agent-use.html",
+  "output": "public/agent-use.html",
   "minify": false,
   "minify-version": 0,
   "pagination": false,
@@ -12,12 +12,13 @@
   "pagination-separator": "",
   "pagination-pages": 0,
   "dependencies": [
-    "content/video-rendering.html",
+    "content/agent-use.html",
     "templates/docs-nav.html",
     "templates/docs.html",
     "templates/head.html"
   ],
   "reqs": [
+    "public/agent-reference.html",
     "public/architecture.html",
     "public/assets/css/extras.css",
     "public/assets/css/mobile-nav.css",

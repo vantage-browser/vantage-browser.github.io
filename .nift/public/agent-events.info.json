@@ -1,9 +1,9 @@
 {
-  "name": "video-rendering",
-  "title": "Video rendering",
+  "name": "agent-events",
+  "title": "Agent events and diagnostics",
   "template": "templates/docs.html",
-  "content": "content/video-rendering.html",
-  "output": "public/video-rendering.html",
+  "content": "content/agent-events.html",
+  "output": "public/agent-events.html",
   "minify": false,
   "minify-version": 0,
   "pagination": false,
@@ -12,7 +12,7 @@
   "pagination-separator": "",
   "pagination-pages": 0,
   "dependencies": [
-    "content/video-rendering.html",
+    "content/agent-events.html",
     "templates/docs-nav.html",
     "templates/docs.html",
     "templates/head.html"

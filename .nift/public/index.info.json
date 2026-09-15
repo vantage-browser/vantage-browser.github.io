@@ -17,6 +17,7 @@
   ],
   "reqs": [
     "public/assets/css/extras.css",
+    "public/assets/css/mobile-nav.css",
     "public/assets/css/style.css",
     "public/assets/images/favicon.svg",
     "public/assets/images/vant-mark.svg",
