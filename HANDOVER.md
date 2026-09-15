@@ -32,6 +32,39 @@ nift build --all
 Then inspect source and generated repository diffs separately. Pushes, deployment,
 releases and public claims require explicit approval.
 
+## Agent-native documentation policy
+
+As Vantage's agent-native browser work lands, maintain the website continuously
+rather than documenting it after implementation. Every checkpoint that changes
+user-visible or agent-visible behavior should update the relevant website source
+in `content/` in the same checkpoint, then rebuild through Nift. Do not hand-edit
+generated HTML under `public/`.
+
+Maintain two deliberately different documentation depths:
+
+- Human-facing pages should be detailed, example-rich and easy to scan. Explain
+  concepts, quick starts, common workflows, human-plus-agent control,
+  privacy/security and troubleshooting without turning each page into an API
+  textbook.
+- Agent-oriented pages may be intentionally exhaustive. Include exact CLI and
+  RPC syntax, schemas, capability discovery, WebKit/Vantage surfaces, lifecycle
+  and stale-handle rules, error codes, event contracts, compatibility caveats and
+  extensive executable examples. Make these pages easy for coding agents to
+  retrieve individually rather than forcing them to scrape human prose for exact
+  protocol behavior.
+
+Keep planned and implemented functionality visibly distinct. Agent-native public
+positioning must advance only with accepted implementation evidence. Keep
+architecture and security copy explicit about the trust boundary: a deliberately
+trusted local agent may receive broad Vantage/WebKit authority, while ordinary
+web content remains untrusted input inside WebKit's normal web security/process
+boundary and must not inherit application privileges.
+
+When website content changes, follow the repository's normal publication order:
+build with Nift, inspect source and generated diffs separately, commit the nested
+`public/main` deployment repository first, then commit the outer `stage`
+repository so its Git link records the matching generated commit.
+
 This is a living handover for working effectively in a Nift project.
 
 Canonical version:
