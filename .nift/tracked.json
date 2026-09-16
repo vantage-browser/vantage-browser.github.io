@@ -82,6 +82,11 @@
       "template": "templates/docs.html"
     },
     {
+      "name": "agent-fetch",
+      "title": "Agent API fetch",
+      "template": "templates/docs.html"
+    },
+    {
       "name": "agent-rpc",
       "title": "Agent RPC and CLI",
       "template": "templates/docs.html"
