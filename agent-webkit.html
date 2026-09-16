@@ -13,36 +13,36 @@
 <a class="skip-link" href="#main">Skip to content</a>
 <header class="site-header"><a class="brand" href="./"><img src="assets/images/vant-mark.svg" alt=""><span>Vantage Browser</span></a><button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Open navigation"><span></span><span></span><span></span></button><nav class="site-nav" id="site-nav" aria-label="Primary"><a href="./installation.html">Install</a><a href="./docs.html">Docs</a><a href="./security.html">Security</a><a href="https://gantry.cv">Gantry</a><a href="https://github.com/vantage-browser/vant">GitHub</a></nav></header>
 <div class="docs-shell"><button class="docs-nav-toggle" type="button" aria-expanded="false" aria-controls="docs-nav">Browse documentation</button>
-<nav class="docs-nav" id="docs-nav" aria-label="Documentation">
-<a class="docs-home" href="docs.html">Documentation home</a>
-<details open><summary>Get started</summary><a href="installation.html">Installation</a><a href="shortcuts.html">Keyboard shortcuts</a><a href="desktop-integration.html">Desktop integration</a></details>
-<details open><summary>Understand Vantage</summary><a href="features.html">Features</a><a href="privacy.html">Privacy</a><a href="security.html">Security model</a><a href="architecture.html">Architecture</a></details>
-<details open><summary>Agents</summary><a href="agent-use.html">Agent use</a><a href="agent-reference.html">Complete reference</a><a href="agent-rpc.html">RPC + CLI</a><a href="agent-fetch.html">API fetch</a><a href="agent-webkit.html">Page + WebKit</a><a href="agent-events.html">Events + diagnostics</a><a href="agent-recipes.html">Recipes</a></details>
-<details open><summary>Operate</summary><a href="video-rendering.html">Video rendering</a><a href="known-limitations.html">Known limitations</a><a href="development.html">Build from source</a></details>
-</nav><main class="docs-content" id="main"><p class="eyebrow">Vantage documentation</p><h1>Agent WebKit and page reference</h1><p class="docs-intro">Use semantic operations first; use arbitrary JavaScript and WebKit introspection when the semantic layer cannot express the task. All page operations target an explicit live Vantage tab.</p>
-<h2>Snapshot then act</h2><pre><code class="language-bash">vant agent call page.snapshot '{"tab_id":1}'
+                        <nav class="docs-nav" id="docs-nav" aria-label="Documentation">
+                        <a class="docs-home" href="./docs.html">Documentation home</a>
+                        <details open><summary>Get started</summary><a href="./installation.html">Installation</a><a href="./shortcuts.html">Keyboard shortcuts</a><a href="./desktop-integration.html">Desktop integration</a></details>
+                        <details open><summary>Understand Vantage</summary><a href="./features.html">Features</a><a href="./privacy.html">Privacy</a><a href="./security.html">Security model</a><a href="./architecture.html">Architecture</a></details>
+                        <details open><summary>Agents</summary><a href="./agent-use.html">Agent use</a><a href="./agent-reference.html">Complete reference</a><a href="./agent-rpc.html">RPC + CLI</a><a href="./agent-fetch.html">API fetch</a><a href="./agent-webkit.html">Page + WebKit</a><a href="./agent-events.html">Events + diagnostics</a><a href="./agent-recipes.html">Recipes</a></details>
+                        <details open><summary>Operate</summary><a href="./video-rendering.html">Video rendering</a><a href="./known-limitations.html">Known limitations</a><a href="./development.html">Build from source</a></details>
+                        </nav><main class="docs-content" id="main"><p class="eyebrow">Vantage documentation</p><h1>Agent WebKit and page reference</h1><p class="docs-intro">Use semantic operations first; use arbitrary JavaScript and WebKit introspection when the semantic layer cannot express the task. All page operations target an explicit live Vantage tab.</p>
+                                                                                                                                                       <h2>Snapshot then act</h2><pre><code class="language-bash">vant agent call page.snapshot '{"tab_id":1}'
 # =&gt; {generation:3,url:...,title:...,elements:[{ref:"@e3_1",role:"link",name:"Docs",...}]}
 
 vant agent call page.interact '{"tab_id":1,"ref":"@e3_1","action":"click"}'</code></pre><p>Snapshots inventory up to 500 interactive candidates including links, buttons, inputs, textareas, selects, summaries, roles, contenteditable and tabindex targets. Names are derived from accessible/title/text/value/placeholder signals and bounded for compact trajectories.</p>
-<h2>Interaction actions</h2><pre><code>click | focus | fill | type | clear | select | check | uncheck | scroll | key</code></pre><pre><code class="language-bash">vant agent call page.interact '{"tab_id":1,"ref":"@e4_2","action":"fill","value":"agent@example.com"}'
+                                                                                                                                                       <h2>Interaction actions</h2><pre><code>click | focus | fill | type | clear | select | check | uncheck | scroll | key</code></pre><pre><code class="language-bash">vant agent call page.interact '{"tab_id":1,"ref":"@e4_2","action":"fill","value":"agent@example.com"}'
 vant agent call page.interact '{"tab_id":1,"ref":"@e4_3","action":"key","value":"Enter"}'</code></pre><p>A target can be supplied by semantic <code>ref</code> or CSS <code>selector</code>. Prefer refs after a snapshot. A hidden/disabled/stale target is explicit rather than silently forced.</p>
-<h2>Waits</h2><pre><code class="language-bash">vant agent call page.wait '{"tab_id":1,"text":"Complete","timeout_ms":5000}'
+                                                                                                                                                       <h2>Waits</h2><pre><code class="language-bash">vant agent call page.wait '{"tab_id":1,"text":"Complete","timeout_ms":5000}'
 vant agent call page.wait '{"tab_id":1,"selector":"main.ready","timeout_ms":10000}'
 vant agent call page.wait '{"tab_id":1,"ref":"@e7_4","timeout_ms":3000}'</code></pre><p>Wait timeout is bounded to 30 seconds. Prefer state-based waits to arbitrary sleeps.</p>
-<h2>Inspection</h2><pre><code class="language-bash">vant agent call page.inspect '{"tab_id":1,"kind":"text"}'
+                                                                                                                                                       <h2>Inspection</h2><pre><code class="language-bash">vant agent call page.inspect '{"tab_id":1,"kind":"text"}'
 vant agent call page.inspect '{"tab_id":1,"kind":"html"}'
 vant agent call page.inspect '{"tab_id":1,"kind":"selection"}'
 vant agent call page.inspect '{"tab_id":1,"kind":"metadata"}'</code></pre><p>Use full HTML only when needed; semantic snapshots are usually much smaller and more task-oriented.</p>
-<h2>Arbitrary JavaScript</h2><pre><code class="language-bash">vant agent js 'document.title'
+                                                                                                                                                       <h2>Arbitrary JavaScript</h2><pre><code class="language-bash">vant agent js 'document.title'
 vant agent js '({url:location.href,count:document.links.length})'
 vant agent js --file script.js
 cat script.js | vant agent js -</code></pre><p>JavaScript executes in page context and follows normal WebKit origin/security rules. It does not grant the page a reverse bridge into Vantage.</p>
-<h2>API requests</h2><p>Do not use page JavaScript just to call a public API unless page-origin semantics are required. Prefer <a href="agent-fetch.html"><code>net.fetch</code></a>, which accepts method, headers and body directly and avoids page CORS.</p>
-<h2>WebKit introspection</h2><pre><code class="language-bash">vant agent call webkit.webview '{"tab_id":1}'
+                                                                                                                                                       <h2>API requests</h2><p>Do not use page JavaScript just to call a public API unless page-origin semantics are required. Prefer <a href="./agent-fetch.html"><code>net.fetch</code></a>, which accepts method, headers and body directly and avoids page CORS.</p>
+                                                                                                                                                       <h2>WebKit introspection</h2><pre><code class="language-bash">vant agent call webkit.webview '{"tab_id":1}'
 vant agent call webkit.settings '{"tab_id":1}'
 vant agent call webkit.network '{"tab_id":1}'
 vant agent call webkit.setting.set '{"tab_id":1,"name":"enable-javascript","value":true}'</code></pre><p>Property surfaces reflect the installed WebKitGTK build. Discover and validate rather than assuming a property exists across versions.</p>
-<h2>Screenshot</h2><pre><code class="language-bash">vant agent call page.screenshot '{"tab_id":1,"path":"/tmp/page.png"}'</code></pre><p>Use screenshots when visual state matters; do not substitute screenshots for semantic state when the task is text/DOM based.</p></main></div>
+                                                                                                                                                       <h2>Screenshot</h2><pre><code class="language-bash">vant agent call page.screenshot '{"tab_id":1,"path":"/tmp/page.png"}'</code></pre><p>Use screenshots when visual state matters; do not substitute screenshots for semantic state when the task is text/DOM based.</p></main></div>
 <footer><p>Vantage Browser is built in the open for Linux.</p><nav><a href="./docs.html">Documentation</a><a href="./known-limitations.html">Known limitations</a><a href="https://github.com/vantage-browser/vant">Source</a></nav></footer>
 <script src="assets/js/script.js" defer></script>
 </body>

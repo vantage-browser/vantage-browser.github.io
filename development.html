@@ -13,33 +13,33 @@
 <a class="skip-link" href="#main">Skip to content</a>
 <header class="site-header"><a class="brand" href="./"><img src="assets/images/vant-mark.svg" alt=""><span>Vantage Browser</span></a><button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Open navigation"><span></span><span></span><span></span></button><nav class="site-nav" id="site-nav" aria-label="Primary"><a href="./installation.html">Install</a><a href="./docs.html">Docs</a><a href="./security.html">Security</a><a href="https://gantry.cv">Gantry</a><a href="https://github.com/vantage-browser/vant">GitHub</a></nav></header>
 <div class="docs-shell"><button class="docs-nav-toggle" type="button" aria-expanded="false" aria-controls="docs-nav">Browse documentation</button>
-<nav class="docs-nav" id="docs-nav" aria-label="Documentation">
-<a class="docs-home" href="docs.html">Documentation home</a>
-<details open><summary>Get started</summary><a href="installation.html">Installation</a><a href="shortcuts.html">Keyboard shortcuts</a><a href="desktop-integration.html">Desktop integration</a></details>
-<details open><summary>Understand Vantage</summary><a href="features.html">Features</a><a href="privacy.html">Privacy</a><a href="security.html">Security model</a><a href="architecture.html">Architecture</a></details>
-<details open><summary>Agents</summary><a href="agent-use.html">Agent use</a><a href="agent-reference.html">Complete reference</a><a href="agent-rpc.html">RPC + CLI</a><a href="agent-fetch.html">API fetch</a><a href="agent-webkit.html">Page + WebKit</a><a href="agent-events.html">Events + diagnostics</a><a href="agent-recipes.html">Recipes</a></details>
-<details open><summary>Operate</summary><a href="video-rendering.html">Video rendering</a><a href="known-limitations.html">Known limitations</a><a href="development.html">Build from source</a></details>
-</nav><main class="docs-content" id="main"><p class="eyebrow">Vantage documentation</p><h1>Build from source</h1><p class="docs-intro">Build Vantage directly against the system GTK4, WebKitGTK 6.0 and SQLite libraries. The project is intentionally a native C++20 build rather than an Electron/Chromium bundle.</p>
-<h2>Dependencies</h2><pre><code class="language-bash"># Ubuntu / Debian
+                        <nav class="docs-nav" id="docs-nav" aria-label="Documentation">
+                        <a class="docs-home" href="./docs.html">Documentation home</a>
+                        <details open><summary>Get started</summary><a href="./installation.html">Installation</a><a href="./shortcuts.html">Keyboard shortcuts</a><a href="./desktop-integration.html">Desktop integration</a></details>
+                        <details open><summary>Understand Vantage</summary><a href="./features.html">Features</a><a href="./privacy.html">Privacy</a><a href="./security.html">Security model</a><a href="./architecture.html">Architecture</a></details>
+                        <details open><summary>Agents</summary><a href="./agent-use.html">Agent use</a><a href="./agent-reference.html">Complete reference</a><a href="./agent-rpc.html">RPC + CLI</a><a href="./agent-fetch.html">API fetch</a><a href="./agent-webkit.html">Page + WebKit</a><a href="./agent-events.html">Events + diagnostics</a><a href="./agent-recipes.html">Recipes</a></details>
+                        <details open><summary>Operate</summary><a href="./video-rendering.html">Video rendering</a><a href="./known-limitations.html">Known limitations</a><a href="./development.html">Build from source</a></details>
+                        </nav><main class="docs-content" id="main"><p class="eyebrow">Vantage documentation</p><h1>Build from source</h1><p class="docs-intro">Build Vantage directly against the system GTK4, WebKitGTK 6.0 and SQLite libraries. The project is intentionally a native C++20 build rather than an Electron/Chromium bundle.</p>
+                                                                                                                                         <h2>Dependencies</h2><pre><code class="language-bash"># Ubuntu / Debian
 sudo apt install build-essential pkg-config python3 \
   libgtk-4-dev libwebkitgtk-6.0-dev libsqlite3-dev
 
 # Verify discovery
 pkg-config --modversion gtk4 webkitgtk-6.0 sqlite3</code></pre>
-<h2>Build</h2><pre><code class="language-bash">make
+                                                                                                                                         <h2>Build</h2><pre><code class="language-bash">make
 ./build/vant --version
 ./build/vant https://example.com</code></pre><p>The Makefile uses <code>C++20</code>, warnings-as-errors and system pkg-config metadata. JS++ is pinned under <code>third_party/jspp</code> and linked into the native build.</p>
-<h2>Tests</h2><pre><code class="language-bash">make test-unit
+                                                                                                                                         <h2>Tests</h2><pre><code class="language-bash">make test-unit
 make smoke
 make test
 make test-sanitize
 make vendor-integrity
 make vendor-check</code></pre><p><code>test-unit</code> includes model/state tests, desktop-entry validation, agent security tests and JS++ adapter/automation coverage. Native agent/browser tests require a graphical WebKit-capable environment.</p>
-<h2>Agent-native regression</h2><pre><code class="language-bash">make test-agent-native</code></pre><p>This launches a real Vantage instance, exercises the local agent surface, then tears it down. Run it in an environment where GTK/WebKit can create a browser window.</p>
-<h2>Useful probes</h2><pre><code class="language-bash">./build/vant --headless-smoke
+                                                                                                                                         <h2>Agent-native regression</h2><pre><code class="language-bash">make test-agent-native</code></pre><p>This launches a real Vantage instance, exercises the local agent surface, then tears it down. Run it in an environment where GTK/WebKit can create a browser window.</p>
+                                                                                                                                         <h2>Useful probes</h2><pre><code class="language-bash">./build/vant --headless-smoke
 ./build/vant --native-probe
 env WEBKIT_DISABLE_COMPOSITING_MODE=1 ./build/vant --native-smoke</code></pre>
-<h2>Repository landmarks</h2><table><thead><tr><th>Path</th><th>Role</th></tr></thead><tbody><tr><td><code>src/</code></td><td>Native browser/model/agent implementation.</td></tr><tr><td><code>tests/</code></td><td>Unit, native, security and desktop-entry tests.</td></tr><tr><td><code>packaging/</code></td><td>Desktop entry and launcher icon.</td></tr><tr><td><code>third_party/jspp/</code></td><td>Pinned JS++ dependency.</td></tr><tr><td><code>docs/</code></td><td>Repository-level technical references.</td></tr></tbody></table></main></div>
+                                                                                                                                         <h2>Repository landmarks</h2><table><thead><tr><th>Path</th><th>Role</th></tr></thead><tbody><tr><td><code>src/</code></td><td>Native browser/model/agent implementation.</td></tr><tr><td><code>tests/</code></td><td>Unit, native, security and desktop-entry tests.</td></tr><tr><td><code>packaging/</code></td><td>Desktop entry and launcher icon.</td></tr><tr><td><code>third_party/jspp/</code></td><td>Pinned JS++ dependency.</td></tr><tr><td><code>docs/</code></td><td>Repository-level technical references.</td></tr></tbody></table></main></div>
 <footer><p>Vantage Browser is built in the open for Linux.</p><nav><a href="./docs.html">Documentation</a><a href="./known-limitations.html">Known limitations</a><a href="https://github.com/vantage-browser/vant">Source</a></nav></footer>
 <script src="assets/js/script.js" defer></script>
 </body>

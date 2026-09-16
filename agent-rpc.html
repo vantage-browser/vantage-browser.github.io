@@ -13,15 +13,15 @@
 <a class="skip-link" href="#main">Skip to content</a>
 <header class="site-header"><a class="brand" href="./"><img src="assets/images/vant-mark.svg" alt=""><span>Vantage Browser</span></a><button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Open navigation"><span></span><span></span><span></span></button><nav class="site-nav" id="site-nav" aria-label="Primary"><a href="./installation.html">Install</a><a href="./docs.html">Docs</a><a href="./security.html">Security</a><a href="https://gantry.cv">Gantry</a><a href="https://github.com/vantage-browser/vant">GitHub</a></nav></header>
 <div class="docs-shell"><button class="docs-nav-toggle" type="button" aria-expanded="false" aria-controls="docs-nav">Browse documentation</button>
-<nav class="docs-nav" id="docs-nav" aria-label="Documentation">
-<a class="docs-home" href="docs.html">Documentation home</a>
-<details open><summary>Get started</summary><a href="installation.html">Installation</a><a href="shortcuts.html">Keyboard shortcuts</a><a href="desktop-integration.html">Desktop integration</a></details>
-<details open><summary>Understand Vantage</summary><a href="features.html">Features</a><a href="privacy.html">Privacy</a><a href="security.html">Security model</a><a href="architecture.html">Architecture</a></details>
-<details open><summary>Agents</summary><a href="agent-use.html">Agent use</a><a href="agent-reference.html">Complete reference</a><a href="agent-rpc.html">RPC + CLI</a><a href="agent-fetch.html">API fetch</a><a href="agent-webkit.html">Page + WebKit</a><a href="agent-events.html">Events + diagnostics</a><a href="agent-recipes.html">Recipes</a></details>
-<details open><summary>Operate</summary><a href="video-rendering.html">Video rendering</a><a href="known-limitations.html">Known limitations</a><a href="development.html">Build from source</a></details>
-</nav><main class="docs-content" id="main"><p class="eyebrow">Vantage documentation</p><h1>Agent RPC and CLI</h1><p class="docs-intro">Exact local RPC and CLI contract. The Unix socket belongs to the running Vantage process, is permissioned to the same OS user, and is the authoritative interface beneath the CLI.</p>
-<h2>Envelope</h2><pre><code class="language-json">{"version":1,"id":"req-42","method":"browser.tabs","params":{}}</code></pre><p>Success: <code>{"version":1,"id":"req-42","ok":true,"result":...}</code>. Failure: <code>{"version":1,"id":"req-42","ok":false,"error":{"code":"...","message":"..."}}</code>. One newline-delimited request is sent per connection.</p>
-<h2>CLI grammar</h2><pre><code class="language-bash">vant agent [--json] status
+                        <nav class="docs-nav" id="docs-nav" aria-label="Documentation">
+                        <a class="docs-home" href="./docs.html">Documentation home</a>
+                        <details open><summary>Get started</summary><a href="./installation.html">Installation</a><a href="./shortcuts.html">Keyboard shortcuts</a><a href="./desktop-integration.html">Desktop integration</a></details>
+                        <details open><summary>Understand Vantage</summary><a href="./features.html">Features</a><a href="./privacy.html">Privacy</a><a href="./security.html">Security model</a><a href="./architecture.html">Architecture</a></details>
+                        <details open><summary>Agents</summary><a href="./agent-use.html">Agent use</a><a href="./agent-reference.html">Complete reference</a><a href="./agent-rpc.html">RPC + CLI</a><a href="./agent-fetch.html">API fetch</a><a href="./agent-webkit.html">Page + WebKit</a><a href="./agent-events.html">Events + diagnostics</a><a href="./agent-recipes.html">Recipes</a></details>
+                        <details open><summary>Operate</summary><a href="./video-rendering.html">Video rendering</a><a href="./known-limitations.html">Known limitations</a><a href="./development.html">Build from source</a></details>
+                        </nav><main class="docs-content" id="main"><p class="eyebrow">Vantage documentation</p><h1>Agent RPC and CLI</h1><p class="docs-intro">Exact local RPC and CLI contract. The Unix socket belongs to the running Vantage process, is permissioned to the same OS user, and is the authoritative interface beneath the CLI.</p>
+                                                                                                                                         <h2>Envelope</h2><pre><code class="language-json">{"version":1,"id":"req-42","method":"browser.tabs","params":{}}</code></pre><p>Success: <code>{"version":1,"id":"req-42","ok":true,"result":...}</code>. Failure: <code>{"version":1,"id":"req-42","ok":false,"error":{"code":"...","message":"..."}}</code>. One newline-delimited request is sent per connection.</p>
+                                                                                                                                         <h2>CLI grammar</h2><pre><code class="language-bash">vant agent [--json] status
 vant agent [--json] version
 vant agent [--json] capabilities
 vant agent tabs
@@ -35,8 +35,8 @@ vant agent events
 vant agent watch
 vant agent call METHOD [JSON]
 vant agent js [--file FILE|-|SCRIPT]</code></pre>
-<p>Exit status: 0 success, 1 runtime/RPC failure, 2 invalid CLI usage. Default output prints the result only; <code>--json</code> prints the complete envelope. <code>call</code> is the universal escape hatch.</p>
-<h2>Examples</h2><pre><code class="language-bash">vant agent tabs
+                                                                                                                                         <p>Exit status: 0 success, 1 runtime/RPC failure, 2 invalid CLI usage. Default output prints the result only; <code>--json</code> prints the complete envelope. <code>call</code> is the universal escape hatch.</p>
+                                                                                                                                         <h2>Examples</h2><pre><code class="language-bash">vant agent tabs
 vant agent open https://example.com 1
 vant agent snapshot 1
 vant agent click @e2_5 1
@@ -44,16 +44,16 @@ vant agent fill @e2_7 'hello world' 1
 vant agent fetch https://api.example.com/status
 vant agent call page.inspect '{"tab_id":1,"kind":"metadata"}'
 vant agent js 'document.title'</code></pre>
-<h2>Method discovery</h2><pre><code class="language-bash">vant agent capabilities
+                                                                                                                                         <h2>Method discovery</h2><pre><code class="language-bash">vant agent capabilities
 vant agent call describe '{}'
 vant agent call describe '{"name":"page.snapshot"}'</code></pre>
-<h2>Error model</h2><p>RPC errors include <code>method_not_found</code>, <code>invalid_request</code>, <code>request_too_large</code>, <code>not_found</code>, <code>timeout</code>, <code>javascript_error</code>, <code>fetch_error</code>, <code>navigation_rejected</code>, <code>navigation_external</code>, <code>invalid_param_type</code>, <code>invalid_property</code>, <code>cookie_error</code> and <code>screenshot_error</code>. Semantic interaction failures are returned inside the method result as <code>stale_or_missing</code>, <code>disabled</code> or <code>hidden</code>.</p>
-<h2>Boundaries</h2><p>Inbound requests are bounded to 1 MiB. RPC operations are bounded; agents should not use RPC as a bulk-file transport. <code>net.fetch</code> separately bounds returned response bodies. A timeout does not mean an arbitrary non-idempotent operation is safe to repeat.</p>
-<h2>Direct client</h2><pre><code>python3 tools/vant_agent.py browser.tabs '{}'
+                                                                                                                                         <h2>Error model</h2><p>RPC errors include <code>method_not_found</code>, <code>invalid_request</code>, <code>request_too_large</code>, <code>not_found</code>, <code>timeout</code>, <code>javascript_error</code>, <code>fetch_error</code>, <code>navigation_rejected</code>, <code>navigation_external</code>, <code>invalid_param_type</code>, <code>invalid_property</code>, <code>cookie_error</code> and <code>screenshot_error</code>. Semantic interaction failures are returned inside the method result as <code>stale_or_missing</code>, <code>disabled</code> or <code>hidden</code>.</p>
+                                                                                                                                         <h2>Boundaries</h2><p>Inbound requests are bounded to 1 MiB. RPC operations are bounded; agents should not use RPC as a bulk-file transport. <code>net.fetch</code> separately bounds returned response bodies. A timeout does not mean an arbitrary non-idempotent operation is safe to repeat.</p>
+                                                                                                                                         <h2>Direct client</h2><pre><code>python3 tools/vant_agent.py browser.tabs '{}'
 python3 tools/vant_agent.py page.snapshot '{"tab_id":1}'
 python3 tools/vant_agent.py net.fetch '{"url":"https://api.example.com/status"}'</code></pre><p>Integrations should prefer the Unix RPC directly when process-spawning the CLI for every call is undesirable. Cortex, Warden, Codex, OpenCode, scripts and custom agents can share the same protocol without a Gantry dependency.</p>
-<h2>Concurrency</h2><p>Multiple local clients are accepted concurrently. Requests touching Vantage/WebKit are dispatched on the application main context. IDs are never retargeted to make a race appear successful. If another controller closes a tab, expect <code>not_found</code>.</p>
-<h2>Stability</h2><p>Protocol 1 is stable. Additive optional fields/methods are compatible. Use discovery rather than hard-coding a complete capability set forever.</p></main></div>
+                                                                                                                                         <h2>Concurrency</h2><p>Multiple local clients are accepted concurrently. Requests touching Vantage/WebKit are dispatched on the application main context. IDs are never retargeted to make a race appear successful. If another controller closes a tab, expect <code>not_found</code>.</p>
+                                                                                                                                         <h2>Stability</h2><p>Protocol 1 is stable. Additive optional fields/methods are compatible. Use discovery rather than hard-coding a complete capability set forever.</p></main></div>
 <footer><p>Vantage Browser is built in the open for Linux.</p><nav><a href="./docs.html">Documentation</a><a href="./known-limitations.html">Known limitations</a><a href="https://github.com/vantage-browser/vant">Source</a></nav></footer>
 <script src="assets/js/script.js" defer></script>
 </body>

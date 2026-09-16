@@ -13,17 +13,17 @@
 <a class="skip-link" href="#main">Skip to content</a>
 <header class="site-header"><a class="brand" href="./"><img src="assets/images/vant-mark.svg" alt=""><span>Vantage Browser</span></a><button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Open navigation"><span></span><span></span><span></span></button><nav class="site-nav" id="site-nav" aria-label="Primary"><a href="./installation.html">Install</a><a href="./docs.html">Docs</a><a href="./security.html">Security</a><a href="https://gantry.cv">Gantry</a><a href="https://github.com/vantage-browser/vant">GitHub</a></nav></header>
 <div class="docs-shell"><button class="docs-nav-toggle" type="button" aria-expanded="false" aria-controls="docs-nav">Browse documentation</button>
-<nav class="docs-nav" id="docs-nav" aria-label="Documentation">
-<a class="docs-home" href="docs.html">Documentation home</a>
-<details open><summary>Get started</summary><a href="installation.html">Installation</a><a href="shortcuts.html">Keyboard shortcuts</a><a href="desktop-integration.html">Desktop integration</a></details>
-<details open><summary>Understand Vantage</summary><a href="features.html">Features</a><a href="privacy.html">Privacy</a><a href="security.html">Security model</a><a href="architecture.html">Architecture</a></details>
-<details open><summary>Agents</summary><a href="agent-use.html">Agent use</a><a href="agent-reference.html">Complete reference</a><a href="agent-rpc.html">RPC + CLI</a><a href="agent-fetch.html">API fetch</a><a href="agent-webkit.html">Page + WebKit</a><a href="agent-events.html">Events + diagnostics</a><a href="agent-recipes.html">Recipes</a></details>
-<details open><summary>Operate</summary><a href="video-rendering.html">Video rendering</a><a href="known-limitations.html">Known limitations</a><a href="development.html">Build from source</a></details>
-</nav><main class="docs-content" id="main"><p class="eyebrow">Vantage documentation</p><h1>Desktop integration</h1><p class="docs-intro">Vantage installs as a per-user Linux desktop application using XDG application data, a stable GTK application ID and a hicolor launcher icon. No root-owned desktop file is required.</p>
-<h2>Installed files</h2><table><thead><tr><th>Component</th><th>Default path</th></tr></thead><tbody><tr><td>Executable</td><td><code>~/.local/bin/vant</code></td></tr><tr><td>Desktop entry</td><td><code>~/.local/share/applications/cv.vantage_browser.Vantage.desktop</code></td></tr><tr><td>Launcher icon</td><td><code>~/.local/share/icons/hicolor/512x512/apps/cv.vantage_browser.Vantage.png</code></td></tr><tr><td>Installed-version marker</td><td><code>~/.local/share/vantage-browser-installed-version</code></td></tr></tbody></table>
-<p>The data root follows <code>XDG_DATA_HOME</code> when set; otherwise it is <code>~/.local/share</code>. The binary directory can be overridden with <code>VANT_INSTALL_DIR</code>. Desktop entries under XDG application directories are the standard Linux mechanism for application-menu discovery.</p>
-<h2>Launcher icon</h2><div class="launcher-icon"><img src="public/assets/images/desktop-launcher.png" alt="Vantage Browser launcher icon"><div><strong>cv.vantage_browser.Vantage</strong><p>The desktop entry names the icon without an extension. The installer places the PNG in the hicolor <code>512x512/apps</code> theme directory and refreshes the GTK icon cache.</p></div></div>
-<h2>Desktop entry file</h2><p>This is the launcher shipped in <code>packaging/cv.vantage_browser.Vantage.desktop</code>:</p><pre><code class="language-ini">[Desktop Entry]
+                        <nav class="docs-nav" id="docs-nav" aria-label="Documentation">
+                        <a class="docs-home" href="./docs.html">Documentation home</a>
+                        <details open><summary>Get started</summary><a href="./installation.html">Installation</a><a href="./shortcuts.html">Keyboard shortcuts</a><a href="./desktop-integration.html">Desktop integration</a></details>
+                        <details open><summary>Understand Vantage</summary><a href="./features.html">Features</a><a href="./privacy.html">Privacy</a><a href="./security.html">Security model</a><a href="./architecture.html">Architecture</a></details>
+                        <details open><summary>Agents</summary><a href="./agent-use.html">Agent use</a><a href="./agent-reference.html">Complete reference</a><a href="./agent-rpc.html">RPC + CLI</a><a href="./agent-fetch.html">API fetch</a><a href="./agent-webkit.html">Page + WebKit</a><a href="./agent-events.html">Events + diagnostics</a><a href="./agent-recipes.html">Recipes</a></details>
+                        <details open><summary>Operate</summary><a href="./video-rendering.html">Video rendering</a><a href="./known-limitations.html">Known limitations</a><a href="./development.html">Build from source</a></details>
+                        </nav><main class="docs-content" id="main"><p class="eyebrow">Vantage documentation</p><h1>Desktop integration</h1><p class="docs-intro">Vantage installs as a per-user Linux desktop application using XDG application data, a stable GTK application ID and a hicolor launcher icon. No root-owned desktop file is required.</p>
+                                                                                                                                           <h2>Installed files</h2><table><thead><tr><th>Component</th><th>Default path</th></tr></thead><tbody><tr><td>Executable</td><td><code>~/.local/bin/vant</code></td></tr><tr><td>Desktop entry</td><td><code>~/.local/share/applications/cv.vantage_browser.Vantage.desktop</code></td></tr><tr><td>Launcher icon</td><td><code>~/.local/share/icons/hicolor/512x512/apps/cv.vantage_browser.Vantage.png</code></td></tr><tr><td>Installed-version marker</td><td><code>~/.local/share/vantage-browser-installed-version</code></td></tr></tbody></table>
+                                                                                                                                           <p>The data root follows <code>XDG_DATA_HOME</code> when set; otherwise it is <code>~/.local/share</code>. The binary directory can be overridden with <code>VANT_INSTALL_DIR</code>. Desktop entries under XDG application directories are the standard Linux mechanism for application-menu discovery.</p>
+                                                                                                                                           <h2>Launcher icon</h2><div class="launcher-icon"><img src="assets/images/desktop-launcher.png" alt="Vantage Browser launcher icon"><div><strong>cv.vantage_browser.Vantage</strong><p>The desktop entry names the icon without an extension. The installer places the PNG in the hicolor <code>512x512/apps</code> theme directory and refreshes the GTK icon cache.</p></div></div>
+                                                                                                                                           <h2>Desktop entry file</h2><p>This is the launcher shipped in <code>packaging/cv.vantage_browser.Vantage.desktop</code>:</p><pre><code class="language-ini">[Desktop Entry]
 Type=Application
 Version=1.0
 Name=Vantage Browser
@@ -46,8 +46,8 @@ Exec=vant
 [Desktop Action NewPrivateWindow]
 Name=New Private Window
 Exec=vant --private</code></pre>
-<h3>Important fields</h3><p><code>Exec=vant %U</code> lets the desktop pass one or more HTTP/HTTPS URLs. <code>StartupWMClass</code> and the GTK application identity use the same stable ID so Wayland/desktop shells associate windows with the launcher. <code>Actions</code> adds right-click New Window and New Private Window entries.</p>
-<h2>Installation sequence</h2><pre><code class="language-bash">mkdir -p ~/.local/bin \
+                                                                                                                                           <h3>Important fields</h3><p><code>Exec=vant %U</code> lets the desktop pass one or more HTTP/HTTPS URLs. <code>StartupWMClass</code> and the GTK application identity use the same stable ID so Wayland/desktop shells associate windows with the launcher. <code>Actions</code> adds right-click New Window and New Private Window entries.</p>
+                                                                                                                                           <h2>Installation sequence</h2><pre><code class="language-bash">mkdir -p ~/.local/bin \
   ~/.local/share/applications \
   ~/.local/share/icons/hicolor/512x512/apps
 
@@ -59,12 +59,12 @@ install -m 0644 packaging/cv.vantage_browser.Vantage.png \
 
 update-desktop-database ~/.local/share/applications
 gtk-update-icon-cache -f ~/.local/share/icons/hicolor</code></pre>
-<h2>Refresh and diagnose</h2><pre><code class="language-bash">desktop-file-validate ~/.local/share/applications/cv.vantage_browser.Vantage.desktop
+                                                                                                                                           <h2>Refresh and diagnose</h2><pre><code class="language-bash">desktop-file-validate ~/.local/share/applications/cv.vantage_browser.Vantage.desktop
 update-desktop-database ~/.local/share/applications
 gtk-update-icon-cache -f ~/.local/share/icons/hicolor
 command -v vant
 vant --version</code></pre><p>Most desktops notice changes automatically. If a compositor retains stale launcher identity/icon state after caches are refreshed, restart the launcher/session before changing application IDs.</p>
-<h2>Default browser and URL handling</h2><p>The desktop entry advertises HTTP, HTTPS and HTML MIME handling. Installation does not silently force Vantage to become the default browser; default-app selection remains a desktop/user policy decision.</p></main></div>
+                                                                                                                                           <h2>Default browser and URL handling</h2><p>The desktop entry advertises HTTP, HTTPS and HTML MIME handling. Installation does not silently force Vantage to become the default browser; default-app selection remains a desktop/user policy decision.</p></main></div>
 <footer><p>Vantage Browser is built in the open for Linux.</p><nav><a href="./docs.html">Documentation</a><a href="./known-limitations.html">Known limitations</a><a href="https://github.com/vantage-browser/vant">Source</a></nav></footer>
 <script src="assets/js/script.js" defer></script>
 </body>
