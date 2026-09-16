@@ -1,6 +1,6 @@
 <p class="docs-intro">Exact local RPC and CLI contract. The Unix socket belongs to the running Vantage process, is permissioned to the same OS user, and is the authoritative interface beneath the CLI.</p>
-<h2>Envelope</h2><pre><code>{"version":1,"id":"req-42","method":"browser.tabs","params":{}}</code></pre><p>Success: <code>{"version":1,"id":"req-42","ok":true,"result":...}</code>. Failure: <code>{"version":1,"id":"req-42","ok":false,"error":{"code":"...","message":"..."}}</code>. One newline-delimited request is sent per connection.</p>
-<h2>CLI grammar</h2><pre><code>vant agent [--json] status
+<h2>Envelope</h2><pre><code class="language-json">{"version":1,"id":"req-42","method":"browser.tabs","params":{}}</code></pre><p>Success: <code>{"version":1,"id":"req-42","ok":true,"result":...}</code>. Failure: <code>{"version":1,"id":"req-42","ok":false,"error":{"code":"...","message":"..."}}</code>. One newline-delimited request is sent per connection.</p>
+<h2>CLI grammar</h2><pre><code class="language-bash">vant agent [--json] status
 vant agent [--json] version
 vant agent [--json] capabilities
 vant agent tabs
@@ -15,7 +15,7 @@ vant agent watch
 vant agent call METHOD [JSON]
 vant agent js [--file FILE|-|SCRIPT]</code></pre>
 <p>Exit status: 0 success, 1 runtime/RPC failure, 2 invalid CLI usage. Default output prints the result only; <code>--json</code> prints the complete envelope. <code>call</code> is the universal escape hatch.</p>
-<h2>Examples</h2><pre><code>vant agent tabs
+<h2>Examples</h2><pre><code class="language-bash">vant agent tabs
 vant agent open https://example.com 1
 vant agent snapshot 1
 vant agent click @e2_5 1
@@ -23,7 +23,7 @@ vant agent fill @e2_7 'hello world' 1
 vant agent fetch https://api.example.com/status
 vant agent call page.inspect '{"tab_id":1,"kind":"metadata"}'
 vant agent js 'document.title'</code></pre>
-<h2>Method discovery</h2><pre><code>vant agent capabilities
+<h2>Method discovery</h2><pre><code class="language-bash">vant agent capabilities
 vant agent call describe '{}'
 vant agent call describe '{"name":"page.snapshot"}'</code></pre>
 <h2>Error model</h2><p>RPC errors include <code>method_not_found</code>, <code>invalid_request</code>, <code>request_too_large</code>, <code>not_found</code>, <code>timeout</code>, <code>javascript_error</code>, <code>fetch_error</code>, <code>navigation_rejected</code>, <code>navigation_external</code>, <code>invalid_param_type</code>, <code>invalid_property</code>, <code>cookie_error</code> and <code>screenshot_error</code>. Semantic interaction failures are returned inside the method result as <code>stale_or_missing</code>, <code>disabled</code> or <code>hidden</code>.</p>

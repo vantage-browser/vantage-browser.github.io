@@ -1,4 +1,21 @@
-<p class="docs-intro">Vantage is C++20 software built against GTK 4, WebKitGTK 6.0 and SQLite. A reviewed JS++ snapshot is included in the repository.</p><h2>Arch and Omarchy dependencies</h2><pre><code>sudo pacman -S --needed base-devel pkgconf python gtk4 webkitgtk-6.0 sqlite</code></pre><p>For complete media support:</p><pre><code>sudo pacman -S --needed gst-plugins-base gst-plugins-good \
-  gst-plugins-bad gst-plugins-ugly gst-libav</code></pre><h2>Build and run</h2><pre><code>make -j"$(nproc)"
-./build/vant</code></pre><h2>Checks</h2><pre><code>make test
-make test-sanitize</code></pre><p>GUI behavior still needs testing on a real Wayland desktop. Headless tests do not establish target-platform compatibility.</p>
+<p class="docs-intro">Build Vantage directly against the system GTK4, WebKitGTK 6.0 and SQLite libraries. The project is intentionally a native C++20 build rather than an Electron/Chromium bundle.</p>
+<h2>Dependencies</h2><pre><code class="language-bash"># Ubuntu / Debian
+sudo apt install build-essential pkg-config python3 \
+  libgtk-4-dev libwebkitgtk-6.0-dev libsqlite3-dev
+
+# Verify discovery
+pkg-config --modversion gtk4 webkitgtk-6.0 sqlite3</code></pre>
+<h2>Build</h2><pre><code class="language-bash">make
+./build/vant --version
+./build/vant https://example.com</code></pre><p>The Makefile uses <code>C++20</code>, warnings-as-errors and system pkg-config metadata. JS++ is pinned under <code>third_party/jspp</code> and linked into the native build.</p>
+<h2>Tests</h2><pre><code class="language-bash">make test-unit
+make smoke
+make test
+make test-sanitize
+make vendor-integrity
+make vendor-check</code></pre><p><code>test-unit</code> includes model/state tests, desktop-entry validation, agent security tests and JS++ adapter/automation coverage. Native agent/browser tests require a graphical WebKit-capable environment.</p>
+<h2>Agent-native regression</h2><pre><code class="language-bash">make test-agent-native</code></pre><p>This launches a real Vantage instance, exercises the local agent surface, then tears it down. Run it in an environment where GTK/WebKit can create a browser window.</p>
+<h2>Useful probes</h2><pre><code class="language-bash">./build/vant --headless-smoke
+./build/vant --native-probe
+env WEBKIT_DISABLE_COMPOSITING_MODE=1 ./build/vant --native-smoke</code></pre>
+<h2>Repository landmarks</h2><table><thead><tr><th>Path</th><th>Role</th></tr></thead><tbody><tr><td><code>src/</code></td><td>Native browser/model/agent implementation.</td></tr><tr><td><code>tests/</code></td><td>Unit, native, security and desktop-entry tests.</td></tr><tr><td><code>packaging/</code></td><td>Desktop entry and launcher icon.</td></tr><tr><td><code>third_party/jspp/</code></td><td>Pinned JS++ dependency.</td></tr><tr><td><code>docs/</code></td><td>Repository-level technical references.</td></tr></tbody></table>

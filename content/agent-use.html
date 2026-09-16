@@ -1,31 +1,35 @@
-<p class="docs-intro">Vantage exposes a stable local control plane for trusted software agents. An agent controls the same live WebKitGTK browser the human is using: real windows, tabs, profile state and visible interaction. These docs intentionally optimize for agent retrieval and precise implementation rather than brevity.</p>
-<h2>Five commands to remember</h2><pre><code>vant agent status
-vant agent capabilities
-vant agent tabs
-vant agent snapshot 1
-vant agent fetch https://api.example.com/status</code></pre><p>Everything else is reachable through <code>vant agent call METHOD JSON</code>. Arbitrary page logic is available through <code>vant agent js</code>.</p>
-<h2>Discover before assuming</h2><pre><code>vant agent version
+<p class="docs-intro">Operational guide for software agents controlling Vantage. Discover first, choose the narrowest primitive, preserve runtime IDs and generation-scoped refs, and recover from explicit errors instead of guessing.</p>
+<h2>Command map</h2><table class="command-table"><thead><tr><th>Command</th><th>Purpose</th><th>Next</th></tr></thead><tbody>
+<tr><td><code>vant agent status</code></td><td>Endpoint liveness</td><td><code>version</code> → <code>capabilities</code></td></tr><tr><td><code>vant agent version</code></td><td>Browser/protocol version</td><td>Check compatibility</td></tr><tr><td><code>vant agent capabilities</code></td><td>Discover methods/features</td><td><code>describe</code> exact schema</td></tr><tr><td><code>vant agent tabs</code></td><td>Live tabs and IDs</td><td>Select explicit tab</td></tr><tr><td><code>vant agent open URL [TAB]</code></td><td>Navigate</td><td>Wait → snapshot</td></tr><tr><td><code>vant agent snapshot TAB</code></td><td>Semantic controls/refs</td><td>Interact with returned ref</td></tr><tr><td><code>vant agent click REF TAB</code></td><td>Click control</td><td>Wait/resnapshot</td></tr><tr><td><code>vant agent fill REF TEXT TAB</code></td><td>Replace editable value</td><td>Resnapshot</td></tr><tr><td><code>vant agent js SCRIPT TAB</code></td><td>Page-JS escape hatch</td><td>Prefer semantics normally</td></tr><tr><td><code>vant agent fetch URL [JSON]</code></td><td>Direct HTTP/API</td><td>Inspect status/body</td></tr><tr><td><code>vant agent call METHOD JSON</code></td><td>Complete RPC surface</td><td>Follow <code>describe</code></td></tr></tbody></table>
+<h2><code>status</code>, <code>version</code>, <code>capabilities</code></h2><p>Start here. Protocol 1 is stable but additive, so discovery is authoritative.</p><pre><code class="language-bash">vant agent status
+vant agent version
 vant agent capabilities
 vant agent call describe '{}'
 vant agent call describe '{"name":"page.interact"}'
-vant agent call describe '{"name":"net.fetch"}'</code></pre><p>Protocol 1 is stable but additive capabilities are expected. Query the installed browser rather than assuming a remembered method exists.</p>
-<h2>Normal page-control loop</h2><pre><code>vant agent tabs
+vant agent call describe '{"name":"net.fetch"}'</code></pre>
+<h2><code>tabs</code> + <code>open</code></h2><p>Tab/window IDs live only as long as their object and are never rebound after closure. Navigation is asynchronous; use state-based waits.</p><pre><code class="language-bash">vant agent tabs
 vant agent open https://example.com 1
-vant agent call page.wait '{"tab_id":1,"text":"Example Domain","timeout_ms":5000}'
+vant agent call page.wait '{"tab_id":1,"text":"Example Domain","timeout_ms":5000}'</code></pre>
+<h2><code>snapshot</code>, <code>click</code>, <code>fill</code></h2><p>Refs such as <code>@e8_2</code> are generation-scoped, not durable selectors. Normal loop: <strong>snapshot → choose ref → interact → wait → snapshot</strong>. On <code>stale_or_missing</code>, observe again; never invent a ref.</p><pre><code class="language-bash">vant agent snapshot 1
+vant agent click @e8_2 1
 vant agent snapshot 1
-vant agent click @e3_2 1
-vant agent snapshot 1</code></pre><p>Refs such as <code>@e3_2</code> are disposable generation-scoped handles. After DOM mutation or navigation, resnapshot. On <code>stale_or_missing</code>, never guess a replacement ref.</p>
-<h2>API-control loop</h2><pre><code>vant agent fetch https://api.example.com/v1/items
-vant agent fetch https://api.example.com/v1/items '{"method":"POST","headers":{"Content-Type":"application/json"},"body":"{\"name\":\"agent-created\"}"}'</code></pre><p>Use <a href="@pathto('agent-fetch')"><code>net.fetch</code></a> for HTTP/API work. Use the page when the task depends on rendering, DOM state or the user's browser session.</p>
-<h2>Preferred abstraction order</h2><pre><code>API request              -&gt; net.fetch
-Browser/tab lifecycle    -&gt; browser.*
-Routine DOM operation    -&gt; page.snapshot + page.interact
-Wait for state           -&gt; page.wait
-Read content             -&gt; page.inspect
-Debug page behavior      -&gt; page.diagnostics
-Exceptional DOM logic    -&gt; page.javascript
-WebKit properties        -&gt; webkit.*</code></pre>
-<h2>Human and agent share one browser</h2><p>Agent actions affect the visible Vantage UI. Preserve unrelated human tabs, use explicit IDs, and expect the human or another controller to change state between observations.</p>
-<h2>Errors are information</h2><p><code>not_found</code>: refresh tabs/windows. <code>stale_or_missing</code>: resnapshot. <code>timeout</code>: inspect diagnostics before deciding to wait or reload. <code>fetch_error</code>: transport failed. HTTP 404/500 from <code>net.fetch</code> is a normal result with <code>ok:false</code>.</p>
-<h2>Trust model</h2><p>The local agent is trusted; loaded websites are not. RPC is same-user local IPC. Pages receive no privileged Vantage bridge. <code>page.javascript</code> remains page-context JavaScript. <code>net.fetch</code> does not silently inherit browser credentials.</p>
-<h2>Deep reference</h2><div class="doc-cards"><a href="@pathto('agent-reference')"><strong>Complete reference</strong><small>Method map, lifecycle and invariants</small></a><a href="@pathto('agent-rpc')"><strong>RPC + CLI</strong><small>Wire protocol, errors and direct clients</small></a><a href="@pathto('agent-fetch')"><strong>API fetch</strong><small>Methods, headers, bodies and responses</small></a><a href="@pathto('agent-webkit')"><strong>Page + WebKit</strong><small>Snapshots, interaction and escape hatches</small></a><a href="@pathto('agent-events')"><strong>Events</strong><small>Diagnostics and asynchronous state</small></a><a href="@pathto('agent-recipes')"><strong>Recipes</strong><small>Reusable end-to-end patterns</small></a></div>
+vant agent fill @e9_4 'agent@example.com' 1</code></pre>
+<h2><code>fetch</code></h2><p>Application-side HTTP: no page CORS and no implicit browser cookies. Supply API authorization explicitly.</p><pre><code class="language-bash">vant agent fetch https://api.example.com/v1/items
+vant agent fetch https://api.example.com/v1/items '{"method":"POST","headers":{"Content-Type":"application/json"},"body":"{\"name\":\"demo\"}"}'</code></pre>
+<h2><code>js</code></h2><p>Use for exceptional DOM computation/page-origin behavior; prefer semantic primitives for routine operation.</p><pre><code class="language-bash">vant agent js 'document.title' 1
+vant agent js 'JSON.stringify({href:location.href,lang:document.documentElement.lang})' 1</code></pre>
+<h2><code>call</code></h2><p>Every non-convenience method remains reachable through the generic RPC client.</p><pre><code class="language-bash">vant agent call page.inspect '{"tab_id":1}'
+vant agent call page.diagnostics '{"tab_id":1}'
+vant agent call events.since '{"cursor":0}'</code></pre>
+<h2>Preferred abstraction order</h2><pre><code>API/HTTP resource          -> net.fetch
+Browser/tab lifecycle      -> browser.*
+Routine DOM operation      -> page.snapshot + page.interact
+Wait for observable state  -> page.wait
+Read content/metadata      -> page.inspect
+Rendered evidence          -> page.screenshot
+Debug page behavior        -> page.diagnostics
+Exceptional DOM logic      -> page.javascript
+WebKit properties/state    -> webkit.*
+Async lifecycle changes    -> events.*</code></pre>
+<h2>Error recovery</h2><table><thead><tr><th>Error</th><th>Recovery</th></tr></thead><tbody><tr><td><code>not_found</code></td><td>Refresh runtime topology.</td></tr><tr><td><code>stale_or_missing</code></td><td>Snapshot/re-identify.</td></tr><tr><td><code>timeout</code></td><td>Inspect diagnostics/load state.</td></tr><tr><td><code>method_not_found</code></td><td>Refresh capabilities.</td></tr><tr><td><code>fetch_error</code></td><td>Transport failure; 4xx/5xx is instead a normal <code>ok:false</code> result.</td></tr></tbody></table>
+<h2>Deep reference</h2><div class="doc-cards"><a href="@pathto('agent-reference')"><strong>Complete reference</strong><small>Namespaces, lifecycle, invariants</small></a><a href="@pathto('agent-rpc')"><strong>RPC + CLI</strong><small>Wire protocol, errors, clients</small></a><a href="@pathto('agent-fetch')"><strong>API fetch</strong><small>Headers, bodies, responses</small></a><a href="@pathto('agent-webkit')"><strong>Page + WebKit</strong><small>Snapshots, interaction, JS</small></a><a href="@pathto('agent-events')"><strong>Events</strong><small>Diagnostics, asynchronous state</small></a><a href="@pathto('agent-recipes')"><strong>Recipes</strong><small>End-to-end patterns</small></a></div>

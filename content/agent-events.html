@@ -1,9 +1,9 @@
 <p class="docs-intro">Use diagnostics for synchronous debugging and the event stream for asynchronous browser lifecycle observation. Both are bounded so long-running agents do not create unbounded browser state.</p>
-<h2>Page diagnostics</h2><pre><code>vant agent call page.diagnostics.clear '{"tab_id":1}'
+<h2>Page diagnostics</h2><pre><code class="language-bash">vant agent call page.diagnostics.clear '{"tab_id":1}'
 vant agent call page.diagnostics '{"tab_id":1}'
 vant agent call page.native_diagnostics '{"tab_id":1}'</code></pre><p>The page diagnostics ring records console calls, JavaScript errors and unhandled rejections. Native diagnostics report the last top-level load error, web-process termination reason and WebKit's current process responsiveness signal.</p>
 <h2>Interpret responsiveness carefully</h2><p><code>responsive:true</code> means WebKit process IPC is responsive; it does not prove every arbitrary page JavaScript evaluation will terminate. A pathological evaluation can wedge while WebKit still reports the process responsive. A dead web process can be recovered by reload; a bounded RPC timeout contains a stuck evaluation.</p>
-<h2>Event cursor</h2><pre><code>vant agent call events.since '{"after":0,"limit":256}'
+<h2>Event cursor</h2><pre><code class="language-bash">vant agent call events.since '{"after":0,"limit":256}'
 vant agent events
 vant agent watch</code></pre><p>Events have monotonically increasing sequence numbers. Persist the last consumed sequence and ask for events after it. The ring reports dropped events if a consumer falls behind. <code>watch</code> is a convenience polling loop; direct integrations can choose their cadence.</p>
 <h2>Published event types</h2><pre><code>page.load

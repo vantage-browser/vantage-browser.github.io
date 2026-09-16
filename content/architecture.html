@@ -1,1 +1,22 @@
-<p class="docs-intro">Vantage is a browser shell with a deliberately explicit division of responsibility.</p><div class="architecture-flow"><div><strong>GTK application</strong><span>Windows, controls and Linux integration</span></div><b>→</b><div><strong>Vantage model</strong><span>Tabs, sessions, history and policy</span></div><b>→</b><div><strong>WebKitGTK</strong><span>Web content, media and rendering</span></div></div><h2>Not a Chromium fork</h2><p>Vantage contains no Chromium or Blink code. Familiar controls are a usability choice, not shared browser architecture.</p><h2>JS++</h2><p>A pinned copy of JS++ provides a bounded foundation for future privileged commands and automation. Normal page JavaScript continues to run in WebKit. The current browsing experience does not depend on exposing JS++ to websites.</p><h2>Persistent state</h2><p>SQLite stores browser records such as history, bookmarks, sessions and downloads. Rendering preferences use a small local configuration file so they can be applied before WebKit starts.</p>
+<p class="docs-intro">Vantage is a C++20 GTK4 browser shell around WebKitGTK 6.0. Its architecture keeps browser-owned policy/state separate from the web engine and keeps privileged agent control outside page JavaScript.</p>
+<div class="architecture-flow"><div><strong>GTK application</strong><span>Windows, controls, Wayland and desktop identity</span></div><b>→</b><div><strong>Vantage model</strong><span>Tabs, sessions, history, policy and agent RPC</span></div><b>→</b><div><strong>WebKitGTK</strong><span>DOM, JavaScript, network, media and rendering</span></div></div>
+<h2>Responsibility split</h2><table><thead><tr><th>Layer</th><th>Owns</th><th>Does not own</th></tr></thead><tbody><tr><td>GTK/native shell</td><td>Windows, toolbar, menus, desktop integration</td><td>HTML/JS rendering</td></tr><tr><td>Vantage model</td><td>Tab/window model, local records, policy, orchestration</td><td>Web standards implementation</td></tr><tr><td>WebKitGTK</td><td>Web content, DOM, JS, origins, TLS, media, accessibility</td><td>Vantage UI/application policy</td></tr><tr><td>Agent RPC</td><td>Versioned same-user control surface</td><td>Website-accessible automation bridge</td></tr><tr><td>SQLite/config</td><td>Browser records/preferences</td><td>Remote sync service</td></tr></tbody></table>
+<h2>Not a Chromium fork</h2><p>Vantage contains no Chromium or Blink code. WebKitGTK supplies the web engine. Familiar tab/address/navigation controls are a UX choice, not inherited Chromium architecture.</p>
+<h2>Process and thread boundary</h2><p>Web content executes under WebKit's process model. Native Vantage state remains application-side. Agent RPC clients may arrive concurrently, while WebKit/GTK mutations are marshalled onto the GTK main context; agents should still serialize logically conflicting actions on one tab.</p>
+<h2>Agent control plane</h2><pre><code>agent / Cortex / harness
+        |
+        | local protocol 1
+        v
+Vantage agent RPC
+  | browser.*  lifecycle/navigation
+  | page.*     semantic DOM/waits/JS/diagnostics
+  | net.*      application-side HTTP
+  | webkit.*   engine state/settings
+  | events.*   bounded async event stream
+        |
+        v
+same live Vantage windows + WebKitGTK</code></pre><p>This is intentionally not a separate automation browser. Human and agent can share the same runtime, so observation/action races are explicit and semantic refs are generation-scoped.</p>
+<h2>Persistent state</h2><p>SQLite stores browser records such as history, bookmarks, sessions and downloads. Rendering preferences use a small local configuration file so they can be applied before WebKit starts. Private profiles use ephemeral state where intended.</p>
+<h2>JS++ boundary</h2><p>A pinned JS++ dependency provides a bounded native automation/runtime foundation. Normal website JavaScript still executes in WebKit. Page content is not given JS++ host authority.</p>
+<h2>Why direct <code>net.fetch</code> lives application-side</h2><p>API work does not need a rendered document. Keeping direct HTTP beside the agent RPC avoids fake tabs and page-JavaScript wrappers, while maintaining a clear distinction from page-origin <code>window.fetch()</code>. Browser cookies are not silently attached.</p>
+<h2>Design invariants</h2><ul><li>Websites never gain native agent authority merely by loading.</li><li>Closed runtime IDs are not silently rebound.</li><li>Stale semantic refs fail instead of retargeting.</li><li>Protocol discovery is authoritative for additive features.</li><li>Browser-owned state remains local unless an explicit browser/web/agent action transmits it.</li></ul>

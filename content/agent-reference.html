@@ -1,5 +1,5 @@
 <p class="docs-intro">Machine-oriented reference for Vantage's agent-native surface. This section favors explicit contracts, recovery rules and copyable examples. Start every unfamiliar installation with discovery.</p>
-<h2>Bootstrap</h2><pre><code>vant agent status
+<h2>Bootstrap</h2><pre><code class="language-bash">vant agent status
 vant agent version
 vant agent capabilities
 vant agent call describe '{}'
@@ -28,7 +28,7 @@ Need console/runtime errors?          page.diagnostics
 Need WebKit process/load health?      page.native_diagnostics
 Need lifecycle changes?              events.since</code></pre>
 <h2>Reference map</h2><div class="doc-cards"><a href="@pathto('agent-rpc')"><strong>RPC + CLI</strong><small>Envelope, direct clients, concurrency and errors</small></a><a href="@pathto('agent-fetch')"><strong>net.fetch</strong><small>Direct HTTP requests with headers and bodies</small></a><a href="@pathto('agent-webkit')"><strong>Page + WebKit</strong><small>Semantic refs, interaction, JS and inspection</small></a><a href="@pathto('agent-events')"><strong>Events</strong><small>Cursoring, diagnostics and recovery</small></a><a href="@pathto('agent-recipes')"><strong>Recipes</strong><small>End-to-end task patterns</small></a></div>
-<h2>Discovery is authoritative</h2><pre><code>vant agent call describe '{}'
+<h2>Discovery is authoritative</h2><pre><code class="language-bash">vant agent call describe '{}'
 vant agent call describe '{"name":"net.fetch"}'
 vant agent --json capabilities</code></pre><p>Protocol 1 permits additive methods/features/fields. Tolerate unknown response fields. Handle absent methods as <code>method_not_found</code>.</p>
 <h2>Runtime IDs</h2><p>Window and tab IDs are stable for that object's runtime lifetime and are never silently rebound after closure. Refresh <code>browser.tabs</code> after topology-changing failures.</p>
