@@ -1,9 +1,9 @@
 {
-  "name": "agent-reference",
-  "title": "Agent reference",
+  "name": "agent-fetch",
+  "title": "Agent API fetch",
   "template": "templates/docs.html",
-  "content": "content/agent-reference.html",
-  "output": "public/agent-reference.html",
+  "content": "content/agent-fetch.html",
+  "output": "public/agent-fetch.html",
   "minify": false,
   "minify-version": 0,
   "pagination": false,
@@ -12,7 +12,7 @@
   "pagination-separator": "",
   "pagination-pages": 0,
   "dependencies": [
-    "content/agent-reference.html",
+    "content/agent-fetch.html",
     "templates/docs-nav.html",
     "templates/docs.html",
     "templates/head.html"

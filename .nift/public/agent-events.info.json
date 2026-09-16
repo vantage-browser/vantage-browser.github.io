@@ -18,6 +18,13 @@
     "templates/head.html"
   ],
   "reqs": [
+    "public/agent-events.html",
+    "public/agent-fetch.html",
+    "public/agent-recipes.html",
+    "public/agent-reference.html",
+    "public/agent-rpc.html",
+    "public/agent-use.html",
+    "public/agent-webkit.html",
     "public/architecture.html",
     "public/assets/css/extras.css",
     "public/assets/css/mobile-nav.css",

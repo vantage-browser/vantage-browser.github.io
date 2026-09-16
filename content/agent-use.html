@@ -20,7 +20,7 @@ vant agent fetch https://api.example.com/v1/items '{"method":"POST","headers":{"
 vant agent js 'JSON.stringify({href:location.href,lang:document.documentElement.lang})' 1</code></pre>
 <h2><code>call</code></h2><p>Every non-convenience method remains reachable through the generic RPC client.</p><pre><code class="language-bash">vant agent call page.inspect '{"tab_id":1}'
 vant agent call page.diagnostics '{"tab_id":1}'
-vant agent call events.since '{"cursor":0}'</code></pre>
+vant agent call events.since '{"after":0}'</code></pre>
 <h2>Preferred abstraction order</h2><pre><code>API/HTTP resource          -> net.fetch
 Browser/tab lifecycle      -> browser.*
 Routine DOM operation      -> page.snapshot + page.interact
