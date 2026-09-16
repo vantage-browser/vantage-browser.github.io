@@ -13,17 +13,18 @@
 <a class="skip-link" href="#main">Skip to content</a>
 <header class="site-header"><a class="brand" href="./"><img src="assets/images/vant-mark.svg" alt=""><span>Vantage Browser</span></a><button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Open navigation"><span></span><span></span><span></span></button><nav class="site-nav" id="site-nav" aria-label="Primary"><a href="./installation.html">Install</a><a href="./docs.html">Docs</a><a href="./security.html">Security</a><a href="https://gantry.cv">Gantry</a><a href="https://github.com/vantage-browser/vant">GitHub</a></nav></header>
 <div class="docs-shell"><button class="docs-nav-toggle" type="button" aria-expanded="false" aria-controls="docs-nav">Browse documentation</button>
-                        <nav class="docs-nav" id="docs-nav" aria-label="Documentation">
-                          <a class="docs-home" href="./docs.html">Documentation home</a>
-                          <details open><summary>Get started</summary><a href="./installation.html">Installation</a><a href="./shortcuts.html">Keyboard shortcuts</a><a href="./desktop-integration.html">Desktop integration</a></details>
-                          <details open><summary>Understand Vantage</summary><a href="./features.html">Features</a><a href="./privacy.html">Privacy</a><a href="./security.html">Security model</a><a href="./architecture.html">Architecture</a></details>
-                          <details open><summary>Operate</summary><a href="./video-rendering.html">Video rendering</a><a href="./known-limitations.html">Known limitations</a><a href="./development.html">Build from source</a></details>
-                        </nav><main class="docs-content" id="main"><p class="eyebrow">Vantage documentation</p><h1>Agent events and diagnostics</h1><p class="docs-intro">Use diagnostics for synchronous debugging and the event stream for asynchronous browser lifecycle observation. Both are bounded so long-running agents do not create unbounded browser state.</p>
-<h2>Page diagnostics</h2><pre><code>vant agent call page.diagnostics.clear '{"tab_id":1}'
+<nav class="docs-nav" id="docs-nav" aria-label="Documentation">
+<a class="docs-home" href="docs.html">Documentation home</a>
+<details open><summary>Get started</summary><a href="installation.html">Installation</a><a href="shortcuts.html">Keyboard shortcuts</a><a href="desktop-integration.html">Desktop integration</a></details>
+<details open><summary>Understand Vantage</summary><a href="features.html">Features</a><a href="privacy.html">Privacy</a><a href="security.html">Security model</a><a href="architecture.html">Architecture</a></details>
+<details open><summary>Agents</summary><a href="agent-use.html">Agent use</a><a href="agent-reference.html">Complete reference</a><a href="agent-rpc.html">RPC + CLI</a><a href="agent-fetch.html">API fetch</a><a href="agent-webkit.html">Page + WebKit</a><a href="agent-events.html">Events + diagnostics</a><a href="agent-recipes.html">Recipes</a></details>
+<details open><summary>Operate</summary><a href="video-rendering.html">Video rendering</a><a href="known-limitations.html">Known limitations</a><a href="development.html">Build from source</a></details>
+</nav><main class="docs-content" id="main"><p class="eyebrow">Vantage documentation</p><h1>Agent events and diagnostics</h1><p class="docs-intro">Use diagnostics for synchronous debugging and the event stream for asynchronous browser lifecycle observation. Both are bounded so long-running agents do not create unbounded browser state.</p>
+<h2>Page diagnostics</h2><pre><code class="language-bash">vant agent call page.diagnostics.clear '{"tab_id":1}'
 vant agent call page.diagnostics '{"tab_id":1}'
 vant agent call page.native_diagnostics '{"tab_id":1}'</code></pre><p>The page diagnostics ring records console calls, JavaScript errors and unhandled rejections. Native diagnostics report the last top-level load error, web-process termination reason and WebKit's current process responsiveness signal.</p>
 <h2>Interpret responsiveness carefully</h2><p><code>responsive:true</code> means WebKit process IPC is responsive; it does not prove every arbitrary page JavaScript evaluation will terminate. A pathological evaluation can wedge while WebKit still reports the process responsive. A dead web process can be recovered by reload; a bounded RPC timeout contains a stuck evaluation.</p>
-<h2>Event cursor</h2><pre><code>vant agent call events.since '{"after":0,"limit":256}'
+<h2>Event cursor</h2><pre><code class="language-bash">vant agent call events.since '{"after":0,"limit":256}'
 vant agent events
 vant agent watch</code></pre><p>Events have monotonically increasing sequence numbers. Persist the last consumed sequence and ask for events after it. The ring reports dropped events if a consumer falls behind. <code>watch</code> is a convenience polling loop; direct integrations can choose their cadence.</p>
 <h2>Published event types</h2><pre><code>page.load
@@ -42,8 +43,7 @@ download.failed</code></pre>
   -&gt; browser.tabs (confirm target still exists)
   -&gt; choose: fresh snapshot / wait / reload / abort
   -&gt; never blindly replay non-idempotent actions</code></pre>
-<h2>Security</h2><p>Diagnostics expose page-visible state to the trusted local agent but do not expose a privileged host object to the page. Treat diagnostic content as untrusted website output.</p>
-</main></div>
+<h2>Security</h2><p>Diagnostics expose page-visible state to the trusted local agent but do not expose a privileged host object to the page. Treat diagnostic content as untrusted website output.</p></main></div>
 <footer><p>Vantage Browser is built in the open for Linux.</p><nav><a href="./docs.html">Documentation</a><a href="./known-limitations.html">Known limitations</a><a href="https://github.com/vantage-browser/vant">Source</a></nav></footer>
 <script src="assets/js/script.js" defer></script>
 </body>

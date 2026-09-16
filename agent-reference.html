@@ -13,13 +13,14 @@
 <a class="skip-link" href="#main">Skip to content</a>
 <header class="site-header"><a class="brand" href="./"><img src="assets/images/vant-mark.svg" alt=""><span>Vantage Browser</span></a><button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Open navigation"><span></span><span></span><span></span></button><nav class="site-nav" id="site-nav" aria-label="Primary"><a href="./installation.html">Install</a><a href="./docs.html">Docs</a><a href="./security.html">Security</a><a href="https://gantry.cv">Gantry</a><a href="https://github.com/vantage-browser/vant">GitHub</a></nav></header>
 <div class="docs-shell"><button class="docs-nav-toggle" type="button" aria-expanded="false" aria-controls="docs-nav">Browse documentation</button>
-                        <nav class="docs-nav" id="docs-nav" aria-label="Documentation">
-                          <a class="docs-home" href="./docs.html">Documentation home</a>
-                          <details open><summary>Get started</summary><a href="./installation.html">Installation</a><a href="./shortcuts.html">Keyboard shortcuts</a><a href="./desktop-integration.html">Desktop integration</a></details>
-                          <details open><summary>Understand Vantage</summary><a href="./features.html">Features</a><a href="./privacy.html">Privacy</a><a href="./security.html">Security model</a><a href="./architecture.html">Architecture</a></details>
-                          <details open><summary>Operate</summary><a href="./video-rendering.html">Video rendering</a><a href="./known-limitations.html">Known limitations</a><a href="./development.html">Build from source</a></details>
-                        </nav><main class="docs-content" id="main"><p class="eyebrow">Vantage documentation</p><h1>Agent reference</h1><p class="docs-intro">Machine-oriented reference for Vantage's agent-native surface. This section favors explicit contracts, recovery rules and copyable examples. Start every unfamiliar installation with discovery.</p>
-<h2>Bootstrap</h2><pre><code>vant agent status
+<nav class="docs-nav" id="docs-nav" aria-label="Documentation">
+<a class="docs-home" href="docs.html">Documentation home</a>
+<details open><summary>Get started</summary><a href="installation.html">Installation</a><a href="shortcuts.html">Keyboard shortcuts</a><a href="desktop-integration.html">Desktop integration</a></details>
+<details open><summary>Understand Vantage</summary><a href="features.html">Features</a><a href="privacy.html">Privacy</a><a href="security.html">Security model</a><a href="architecture.html">Architecture</a></details>
+<details open><summary>Agents</summary><a href="agent-use.html">Agent use</a><a href="agent-reference.html">Complete reference</a><a href="agent-rpc.html">RPC + CLI</a><a href="agent-fetch.html">API fetch</a><a href="agent-webkit.html">Page + WebKit</a><a href="agent-events.html">Events + diagnostics</a><a href="agent-recipes.html">Recipes</a></details>
+<details open><summary>Operate</summary><a href="video-rendering.html">Video rendering</a><a href="known-limitations.html">Known limitations</a><a href="development.html">Build from source</a></details>
+</nav><main class="docs-content" id="main"><p class="eyebrow">Vantage documentation</p><h1>Agent reference</h1><p class="docs-intro">Machine-oriented reference for Vantage's agent-native surface. This section favors explicit contracts, recovery rules and copyable examples. Start every unfamiliar installation with discovery.</p>
+<h2>Bootstrap</h2><pre><code class="language-bash">vant agent status
 vant agent version
 vant agent capabilities
 vant agent call describe '{}'
@@ -47,8 +48,8 @@ Need unusual DOM computation?        page.javascript
 Need console/runtime errors?          page.diagnostics
 Need WebKit process/load health?      page.native_diagnostics
 Need lifecycle changes?              events.since</code></pre>
-<h2>Reference map</h2><div class="doc-cards"><a href="./agent-rpc.html"><strong>RPC + CLI</strong><small>Envelope, direct clients, concurrency and errors</small></a><a href="./agent-fetch.html"><strong>net.fetch</strong><small>Direct HTTP requests with headers and bodies</small></a><a href="./agent-webkit.html"><strong>Page + WebKit</strong><small>Semantic refs, interaction, JS and inspection</small></a><a href="./agent-events.html"><strong>Events</strong><small>Cursoring, diagnostics and recovery</small></a><a href="./agent-recipes.html"><strong>Recipes</strong><small>End-to-end task patterns</small></a></div>
-<h2>Discovery is authoritative</h2><pre><code>vant agent call describe '{}'
+<h2>Reference map</h2><div class="doc-cards"><a href="agent-rpc.html"><strong>RPC + CLI</strong><small>Envelope, direct clients, concurrency and errors</small></a><a href="agent-fetch.html"><strong>net.fetch</strong><small>Direct HTTP requests with headers and bodies</small></a><a href="agent-webkit.html"><strong>Page + WebKit</strong><small>Semantic refs, interaction, JS and inspection</small></a><a href="agent-events.html"><strong>Events</strong><small>Cursoring, diagnostics and recovery</small></a><a href="agent-recipes.html"><strong>Recipes</strong><small>End-to-end task patterns</small></a></div>
+<h2>Discovery is authoritative</h2><pre><code class="language-bash">vant agent call describe '{}'
 vant agent call describe '{"name":"net.fetch"}'
 vant agent --json capabilities</code></pre><p>Protocol 1 permits additive methods/features/fields. Tolerate unknown response fields. Handle absent methods as <code>method_not_found</code>.</p>
 <h2>Runtime IDs</h2><p>Window and tab IDs are stable for that object's runtime lifetime and are never silently rebound after closure. Refresh <code>browser.tabs</code> after topology-changing failures.</p>
@@ -60,8 +61,7 @@ DOM mutation/navigation
 <h2>Concurrency</h2><p>Independent RPC clients are serviced concurrently; WebKit/GTK mutations are marshalled onto the GTK main context. Still serialize logically conflicting operations on the same tab. Another human/agent controller can invalidate assumptions between observation and action.</p>
 <h2>Efficiency</h2><p>Use <code>net.fetch</code> instead of rendering a page solely to retrieve API data. Use semantic snapshots instead of full HTML for routine interaction. Snapshot candidates, diagnostics and events are bounded to keep long-running agents predictable.</p>
 <h2>Trust boundary</h2><p>The same-user local agent is privileged. Web content is not. Pages receive no Vantage socket/filesystem/process bridge. <code>page.javascript</code> remains within WebKit page security. <code>net.fetch</code> is application-side and deliberately does not inherit page cookies.</p>
-<h2>Compatibility</h2><p>Wire protocol <strong>1</strong> is stable. Breaking envelope or established-method semantic changes require a new protocol version. Agents should still query <code>capabilities</code>/<code>describe</code> because new optional functionality is additive.</p>
-</main></div>
+<h2>Compatibility</h2><p>Wire protocol <strong>1</strong> is stable. Breaking envelope or established-method semantic changes require a new protocol version. Agents should still query <code>capabilities</code>/<code>describe</code> because new optional functionality is additive.</p></main></div>
 <footer><p>Vantage Browser is built in the open for Linux.</p><nav><a href="./docs.html">Documentation</a><a href="./known-limitations.html">Known limitations</a><a href="https://github.com/vantage-browser/vant">Source</a></nav></footer>
 <script src="assets/js/script.js" defer></script>
 </body>

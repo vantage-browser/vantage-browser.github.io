@@ -1,1 +1,10 @@
 .code-shell{position:relative}.copy-code{position:absolute;top:10px;right:10px;padding:5px 9px;border:1px solid var(--line);border-radius:4px;background:var(--surface);color:var(--muted);cursor:pointer}.copy-code:hover{border-color:var(--orange);color:var(--orange-soft)}
+
+/* Dense technical docs */
+.doc-cards a{grid-template-columns:1fr;grid-template-rows:auto auto;gap:.35rem;min-width:0;overflow:hidden}
+.doc-cards strong,.doc-cards small{min-width:0;overflow-wrap:anywhere}.doc-cards small{display:block;line-height:1.45}
+.command-table td:first-child{width:42%}.command-table code{white-space:nowrap}
+.launcher-icon{display:flex;align-items:center;gap:24px;margin:24px 0;padding:22px;border:1px solid var(--line);background:var(--surface)}
+.launcher-icon img{width:96px;height:96px;object-fit:contain}.launcher-icon p{margin:.4rem 0 0}
+.tok-comment{color:#7f8c7a}.tok-string{color:#9fd6a9}.tok-keyword{color:#ff9d7e;font-weight:650}.tok-number{color:#d7b7ff}.tok-key{color:#8dc7ff}.tok-option{color:#f3c77c}.tok-section{color:#ff9d7e;font-weight:700}
+@media(max-width:760px){.command-table{display:block;overflow-x:auto}.launcher-icon{align-items:flex-start}.launcher-icon img{width:72px;height:72px}}
