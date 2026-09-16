@@ -18,20 +18,55 @@
                           <details open><summary>Get started</summary><a href="./installation.html">Installation</a><a href="./shortcuts.html">Keyboard shortcuts</a><a href="./desktop-integration.html">Desktop integration</a></details>
                           <details open><summary>Understand Vantage</summary><a href="./features.html">Features</a><a href="./privacy.html">Privacy</a><a href="./security.html">Security model</a><a href="./architecture.html">Architecture</a></details>
                           <details open><summary>Operate</summary><a href="./video-rendering.html">Video rendering</a><a href="./known-limitations.html">Known limitations</a><a href="./development.html">Build from source</a></details>
-                        </nav><main class="docs-content" id="main"><p class="eyebrow">Vantage documentation</p><h1>Agent recipes</h1><p class="docs-intro">Executable patterns intended for agents driving the same visible Vantage session as the human user.</p>
-                                                                                                                                     <h2>Inspect and operate a page</h2><pre><code>vant agent call browser.tabs '{}'
-vant agent call page.snapshot '{"tab_id":1}'
-vant agent call page.interact '{"tab_id":1,"ref":"@e1_4","action":"click"}'
-vant agent call page.wait '{"tab_id":1,"text":"Welcome","timeout_ms":5000}'</code></pre>
-                                                                                                                                     <h2>Debug a frontend</h2><pre><code># after rebuilding/reloading the application
-vant agent call page.diagnostics.clear '{"tab_id":1}'
-vant agent call browser.reload '{"tab_id":1}'
-vant agent call page.diagnostics '{"tab_id":1}'
-vant agent call page.snapshot '{"tab_id":1}'</code></pre><p>Use arbitrary JavaScript when semantic operations are not expressive enough. The agent is operating the user's actual tab, so human observation/intervention remains possible.</p>
-                                                                                                                                     <h2>A13 compact CLI workflow</h2><pre><code>vant agent tabs
+                        </nav><main class="docs-content" id="main"><p class="eyebrow">Vantage documentation</p><h1>Agent recipes</h1><p class="docs-intro">Copyable patterns for agents operating Vantage. Prefer these observation/action/re-observation loops over long brittle action chains.</p>
+<h2>Navigate and click by meaning</h2><pre><code>vant agent tabs
+vant agent open https://example.com 1
+vant agent call page.wait '{"tab_id":1,"selector":"body","timeout_ms":5000}'
 vant agent snapshot 1
-vant agent click @e2_5 1
-vant agent diagnostics 1</code></pre><p>Prefer these compact forms for routine operation and fall back to <code>vant agent call</code> or arbitrary JavaScript for the complete surface.</p></main></div>
+# resolve the desired element from role/name
+vant agent click @e2_4 1
+vant agent snapshot 1</code></pre>
+<h2>Fill and submit a form</h2><pre><code>vant agent snapshot 1
+vant agent fill @e5_2 'agent@example.com' 1
+vant agent fill @e5_3 'example value' 1
+vant agent click @e5_4 1
+vant agent call page.wait '{"tab_id":1,"text":"Saved","timeout_ms":10000}'</code></pre><p>After any mutation that invalidates refs, resnapshot before continuing.</p>
+<h2>Call a JSON API</h2><pre><code>vant agent fetch https://api.example.com/v1/items '{
+  "method":"POST",
+  "headers":{"Authorization":"Bearer REDACTED","Content-Type":"application/json"},
+  "body":"{\"name\":\"created by agent\"}"
+}'</code></pre><p>Inspect <code>status</code>/<code>ok</code>. HTTP errors are results, transport errors are <code>fetch_error</code>. See <a href="./agent-fetch.html">API fetch</a>.</p>
+<h2>Read API then update page</h2><pre><code># 1. net.fetch API data
+# 2. parse returned body
+# 3. snapshot the target page
+# 4. fill/click using semantic refs
+# 5. wait for confirmation
+# 6. snapshot again to verify</code></pre>
+<h2>Debug a frontend</h2><pre><code>vant agent call page.diagnostics.clear '{"tab_id":1}'
+vant agent call browser.reload '{"tab_id":1}'
+vant agent call page.wait '{"tab_id":1,"selector":"body","timeout_ms":10000}'
+vant agent call page.diagnostics '{"tab_id":1}'
+vant agent call page.native_diagnostics '{"tab_id":1}'
+vant agent snapshot 1</code></pre>
+<h2>Recover from a stale ref</h2><pre><code>page.interact =&gt; {ok:false,error:"stale_or_missing"}
+# do not invent @e refs
+vant agent snapshot 1
+# resolve target again by role/name
+vant agent click NEW_REF 1</code></pre>
+<h2>Recover from a missing tab</h2><pre><code>RPC =&gt; not_found
+vant agent tabs
+# identify the intended live tab; do not assume IDs were reused</code></pre>
+<h2>Multi-tab work</h2><pre><code>vant agent call browser.tabs '{}'
+vant agent call browser.tab.new '{"window_id":1,"uri":"https://example.org"}'
+vant agent call browser.tab.select '{"tab_id":2}'
+vant agent call page.snapshot '{"tab_id":2}'</code></pre><p>Always carry explicit <code>tab_id</code> through multi-tab workflows.</p>
+<h2>Use JavaScript only when useful</h2><pre><code>vant agent js 'Array.from(document.querySelectorAll("article")).map(x=&gt;x.innerText)'
+</code></pre><p>For routine controls, semantic operations are easier to recover and audit. For direct HTTP, use <code>net.fetch</code>. JavaScript is the page-level escape hatch.</p>
+<h2>Safe retry rule</h2><pre><code>GET/read operation failed before response?     retry may be reasonable
+POST/PATCH/DELETE timed out?                   inspect first
+click "Purchase" timed out?                   inspect resulting state first
+stale semantic ref?                           resnapshot, then decide</code></pre>
+</main></div>
 <footer><p>Vantage Browser is built in the open for Linux.</p><nav><a href="./docs.html">Documentation</a><a href="./known-limitations.html">Known limitations</a><a href="https://github.com/vantage-browser/vant">Source</a></nav></footer>
 <script src="assets/js/script.js" defer></script>
 </body>
